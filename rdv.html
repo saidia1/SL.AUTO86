@@ -153,7 +153,7 @@ document.querySelectorAll('.mechanic-nav a').forEach(link => {
     </script>
     <script>
             // Récupère les créneaux validés depuis l'API backend et bloque leur sélection
-            fetch('http://localhost:3001/rdvs')
+            fetch('https://sl-auto86.onrender.com/rdvs')
               .then(res => res.json())
               .then(data => {
                 // Créneaux validés par date (clé: 'YYYY-MM-DD', valeurs: ['HH:mm', ...])
@@ -234,7 +234,7 @@ window.addEventListener('keydown', function(e) {
 document.getElementById('rdv-form').addEventListener('submit', function(e) {
   e.preventDefault();
   const data = Object.fromEntries(new FormData(this));
-  fetch('http://localhost:3001/rdvs', {
+  fetch('https://sl-auto86.onrender.com/rdvs', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data)
