@@ -358,14 +358,29 @@ window.addEventListener('keydown', function(e) {
 </style>
 <div id="rdv-popup">
   <div class="rdv-popup-content">
-    <button id="close-rdv-popup">X</button>
-    <h2>Prendre rendez-vous</h2>
-    <form id="rdv-form-index">
-      <div class="rdv-field"><span class="rdv-icon">&#128100;</span><input type="text" name="lastname" placeholder="Nom" required></div>
-      <div class="rdv-field"><span class="rdv-icon">&#128100;</span><input type="text" name="firstname" placeholder="Prénom" required></div>
-      <div class="rdv-field"><span class="rdv-icon">&#128663;</span><input type="text" name="vehicule" placeholder="Véhicule" required></div>
-      <div class="rdv-field"><span class="rdv-icon">&#128661;</span>
-        <select name="categorie" required>
+    <div style="max-height:80vh;overflow-y:auto;padding-bottom:12px;">
+      <button id="close-rdv-popup">X</button>
+      <h2>Prendre rendez-vous</h2>
+      <form id="rdv-form-index">
+      <div style="margin-bottom:18px;padding:12px 10px;background:#fffbe6;border-radius:12px;border:1px solid #eab30833;box-shadow:0 2px 8px #eab30822;display:flex;flex-direction:column;align-items:stretch;gap:6px;">
+        <span style="color:#eab308;font-size:1em;font-weight:500;">Votre nom de famille.</span>
+        <label for="lastname-index" style="font-weight:500;color:#23272a;font-size:1.05em;">Nom :</label>
+        <input type="text" id="lastname-index" name="lastname" required style="padding:10px 12px;border-radius:8px;border:1px solid #eab30855;font-size:1em;background:#f8fafc;color:#23272a;width:100%;box-sizing:border-box;">
+      </div>
+      <div style="margin-bottom:18px;padding:12px 10px;background:#fffbe6;border-radius:12px;border:1px solid #eab30833;box-shadow:0 2px 8px #eab30822;display:flex;flex-direction:column;align-items:stretch;gap:6px;">
+        <span style="color:#eab308;font-size:1em;font-weight:500;">Votre prénom usuel.</span>
+        <label for="firstname-index" style="font-weight:500;color:#23272a;font-size:1.05em;">Prénom :</label>
+        <input type="text" id="firstname-index" name="firstname" required style="padding:10px 12px;border-radius:8px;border:1px solid #eab30855;font-size:1em;background:#f8fafc;color:#23272a;width:100%;box-sizing:border-box;">
+      </div>
+      <div style="margin-bottom:18px;padding:12px 10px;background:#fffbe6;border-radius:12px;border:1px solid #eab30833;box-shadow:0 2px 8px #eab30822;display:flex;flex-direction:column;align-items:stretch;gap:6px;">
+        <span style="color:#eab308;font-size:1em;font-weight:500;">Marque et modèle du véhicule (ex : Peugeot 208).</span>
+        <label for="vehicule-index" style="font-weight:500;color:#23272a;font-size:1.05em;">Véhicule :</label>
+        <input type="text" id="vehicule-index" name="vehicule" required style="padding:10px 12px;border-radius:8px;border:1px solid #eab30855;font-size:1em;background:#f8fafc;color:#23272a;width:100%;box-sizing:border-box;">
+      </div>
+      <div style="margin-bottom:18px;padding:12px 10px;background:#fffbe6;border-radius:12px;border:1px solid #eab30833;box-shadow:0 2px 8px #eab30822;display:flex;flex-direction:column;align-items:stretch;gap:6px;">
+        <span style="color:#eab308;font-size:1em;font-weight:500;">Type de véhicule (citadine, SUV, utilitaire...)</span>
+        <label for="categorie-index" style="font-weight:500;color:#23272a;font-size:1.05em;">Catégorie :</label>
+        <select id="categorie-index" name="categorie" required style="padding:10px 12px;border-radius:8px;border:1px solid #eab30855;font-size:1em;background:#f8fafc;color:#23272a;width:100%;box-sizing:border-box;">
           <option value="">Catégorie...</option>
           <option value="Citadine">Citadine</option>
           <option value="Berline">Berline</option>
@@ -374,19 +389,34 @@ window.addEventListener('keydown', function(e) {
           <option value="Autre">Autre</option>
         </select>
       </div>
-      <div class="rdv-field"><span class="rdv-icon">&#9993;</span><input type="email" name="email" placeholder="Email" required></div>
-      <div class="rdv-field"><span class="rdv-icon">&#128222;</span><input type="tel" name="phone" placeholder="Téléphone" required></div>
-      <div class="rdv-field"><span class="rdv-icon">&#9881;</span>
-        <select name="service" required>
+      <div style="margin-bottom:18px;padding:12px 10px;background:#fffbe6;border-radius:12px;border:1px solid #eab30833;box-shadow:0 2px 8px #eab30822;display:flex;flex-direction:column;align-items:stretch;gap:6px;">
+        <span style="color:#eab308;font-size:1em;font-weight:500;">Pour recevoir la confirmation et les infos du rendez-vous.</span>
+        <label for="email-index" style="font-weight:500;color:#23272a;font-size:1.05em;">Email :</label>
+        <input type="email" id="email-index" name="email" required style="padding:10px 12px;border-radius:8px;border:1px solid #eab30855;font-size:1em;background:#f8fafc;color:#23272a;width:100%;box-sizing:border-box;">
+      </div>
+      <div style="margin-bottom:18px;padding:12px 10px;background:#fffbe6;border-radius:12px;border:1px solid #eab30833;box-shadow:0 2px 8px #eab30822;display:flex;flex-direction:column;align-items:stretch;gap:6px;">
+        <span style="color:#eab308;font-size:1em;font-weight:500;">Pour vous joindre en cas de besoin ou rappel.</span>
+        <label for="phone-index" style="font-weight:500;color:#23272a;font-size:1.05em;">Téléphone :</label>
+        <input type="tel" id="phone-index" name="phone" required style="padding:10px 12px;border-radius:8px;border:1px solid #eab30855;font-size:1em;background:#f8fafc;color:#23272a;width:100%;box-sizing:border-box;">
+      </div>
+      <div style="margin-bottom:18px;padding:12px 10px;background:#fffbe6;border-radius:12px;border:1px solid #eab30833;box-shadow:0 2px 8px #eab30822;display:flex;flex-direction:column;align-items:stretch;gap:6px;">
+        <span style="color:#eab308;font-size:1em;font-weight:500;">Choisissez le type d’intervention souhaitée.</span>
+        <label for="service-index" style="font-weight:500;color:#23272a;font-size:1.05em;">Service :</label>
+        <select id="service-index" name="service" required style="padding:10px 12px;border-radius:8px;border:1px solid #eab30855;font-size:1em;background:#f8fafc;color:#23272a;width:100%;box-sizing:border-box;">
           <option value="">Service...</option>
           <option value="Révision">Révision</option>
           <option value="Diagnostic">Diagnostic</option>
           <option value="Carrosserie">Carrosserie</option>
         </select>
       </div>
-      <div class="rdv-field"><span class="rdv-icon">&#128197;</span><input type="datetime-local" name="date" required></div>
-      <button type="submit">Valider</button>
+      <div style="margin-bottom:18px;padding:12px 10px;background:#fffbe6;border-radius:12px;border:1px solid #eab30833;box-shadow:0 2px 8px #eab30822;display:flex;flex-direction:column;align-items:stretch;gap:6px;">
+        <span style="color:#eab308;font-size:1em;font-weight:500;">Sélectionnez le créneau souhaité (du lundi au vendredi, 9h-18h).</span>
+        <label for="date-index" style="font-weight:500;color:#23272a;font-size:1.05em;">Date et heure :</label>
+        <input type="datetime-local" id="date-index" name="date" required style="padding:10px 12px;border-radius:8px;border:1px solid #eab30855;font-size:1em;background:#f8fafc;color:#23272a;width:100%;box-sizing:border-box;">
+      </div>
+      <button type="submit" style="width:100%;background:linear-gradient(90deg,#eab308 80%,#facc15 100%);color:#23272a;font-weight:bold;padding:12px 0;border:none;border-radius:8px;font-size:1.1em;box-shadow:0 2px 12px #eab30833;cursor:pointer;transition:background 0.2s;">Valider</button>
     </form>
+    </div>
   </div>
 </div>
 <script>
