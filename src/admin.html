@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <script>
+    // Redirection si non authentifié
+    if(localStorage.getItem('admin-auth') !== 'ok') {
+      window.location.href = 'admin-login.html';
+    }
+  </script>
+    <meta charset="UTF-8">
+    <title>Admin - Validation des rendez-vous</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header class="mechanic-header">
+        <div class="header-content mechanic-header-content">
+            <h1 class="mechanic-title">Admin - Gestion des rendez-vous</h1>
+        </div>
+    </header>
+    <nav class="mechanic-nav" style="margin-bottom:24px;">
+    <a href="index.html">Accueil</a>
+    <a href="rdv.html">Prendre rendez-vous</a>
+    <a href="contact.html">Contact</a>
+    </nav>
+    <main>
+        <section id="admin-rdv">
+            <h2>Demandes de rendez-vous à valider</h2>
+            <table id="admin-table">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Service</th>
+                        <th>Date & Heure</th>
+                        <th>Statut</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Les demandes seront injectées ici par JS -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+    <script src="js/admin.js"></script>
+</body>
+</html>

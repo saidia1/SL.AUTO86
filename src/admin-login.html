@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Connexion Admin - SL AUTO</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    body { background: #23272a; color: #fff; }
+    .admin-login-container {
+      max-width: 400px; margin: 60px auto; background: rgba(35,39,42,0.95); border-radius: 18px; box-shadow: 0 4px 32px #000a; padding: 32px 28px;
+    }
+    .admin-login-container h2 { color: #eab308; text-align: center; margin-bottom: 24px; }
+    .admin-login-container label { color: #eab308; font-weight: bold; }
+    .admin-login-container input[type="text"],
+    .admin-login-container input[type="password"],
+    .admin-login-container input[type="number"] {
+      width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #eab30844; background: #23272a; color: #fff; margin-bottom: 16px;
+    }
+    .admin-login-container input:focus { outline: none; border-color: #eab308; }
+    .admin-login-container button { width: 100%; background: linear-gradient(90deg, #eab308 60%, #fff700 100%); color: #23272a; font-weight: bold; font-size: 1.1rem; border: none; border-radius: 30px; padding: 12px 0; margin-top: 8px; cursor: pointer; transition: background 0.2s, transform 0.2s; }
+    .admin-login-container button:hover { background: linear-gradient(90deg, #fff700 60%, #eab308 100%); transform: scale(1.03); }
+    .captcha-img { display: block; margin: 0 auto 12px auto; border-radius: 8px; }
+    .sms-section { display: none; margin-top: 18px; }
+    .error-msg { color: #ff5555; margin-bottom: 10px; text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="admin-login-container">
+    <div id="js-warning" style="display:none;color:#ff5555;text-align:center;margin-bottom:10px;"></div>
+    <h2>Connexion Admin</h2>
+    <form id="admin-login-form" autocomplete="off">
+      <div id="sms-debug" style="color:#22c55e;text-align:center;font-size:1.1em;margin-bottom:10px;"></div>
+      <div class="error-msg" id="login-error"></div>
+      <label for="admin-username">Identifiant :</label>
+      <input type="text" id="admin-username" required autocomplete="username">
+      <label for="admin-password">Mot de passe :</label>
+      <input type="password" id="admin-password" required minlength="12" autocomplete="current-password" placeholder="12 caractères minimum">
+      <div id="password-strength" style="font-size:0.95em; margin-bottom:10px;"></div>
+      <label>Test anti-robot :</label>
+      <div class="recaptcha-wrapper">
+        <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
+      </div>
+      
+      <!-- Suppression de la double authentification -->
+      <button type="submit" id="login-btn">Se connecter</button>
+    </form>
+  </div>
+  <script>
+    // --- Alerte si ouvert en file:// ---
+    if (window.location.protocol === 'file:') {
+      document.getElementById('js-warning').style.display = 'block';
+      document.getElementById('js-warning').textContent = '⚠️ Pour que la connexion fonctionne, lance le site via un serveur local (ex: Live Server, http-server, Wamp, Xampp, etc).';
+      console.warn('Le site est ouvert en file://, certaines fonctionnalités JS peuvent être bloquées.');
+    }
+    // --- Paramètres admin (à adapter pour la prod) ---
+    const ADMIN_USERNAME = "admin";
+    const ADMIN_PASSWORD = "SuperMotDePasse2025!"; // min 12 caractères, fort
+    // --- Google reCAPTCHA v2 ---
+    // --- Vérification force du mot de passe ---
+    document.getElementById('admin-password').addEventListener('input', function(e) {
+      console.log('[JS] password input event');
+      const val = e.target.value;
+      let msg = '';
+      if(val.length < 12) msg = 'Mot de passe trop court.';
+      else if(!/[A-Z]/.test(val) || !/[a-z]/.test(val) || !/[0-9]/.test(val) || !/[^A-Za-z0-9]/.test(val))
+        msg = 'Inclure majuscule, minuscule, chiffre et caractère spécial.';
+      else msg = 'Mot de passe fort.';
+      document.getElementById('password-strength').textContent = msg;
+      document.getElementById('password-strength').style.color = msg==='Mot de passe fort.'?'#22c55e':'#ff5555';
+    });
+    // --- Simulation envoi SMS ---
+    let smsCode = null;
+    let loginStep = 1; // 1 = login, 2 = sms
+    function sendSmsCode() {
+      console.log('[JS] sendSmsCode called, code:', smsCode);
+      smsCode = Math.floor(100000+Math.random()*900000).toString();
+      // En prod, envoyer via API SMS ici
+      alert('Code SMS envoyé : ' + smsCode); // Pour la démo
+      document.getElementById('sms-section').style.display = 'block';
+      document.getElementById('sms-code').value = '';
+      // Affiche le code SMS sur la page pour faciliter le test
+      document.getElementById('sms-debug').textContent = 'Code SMS pour test : ' + smsCode;
+    }
+    // --- Gestion du formulaire ---
+    document.getElementById('admin-login-form').onsubmit = function(e) {
+      console.log('[JS] Form submit, loginStep =', loginStep);
+        e.preventDefault();
+        try {
+          document.getElementById('login-error').textContent = '';
+          document.getElementById('login-btn').disabled = false;
+          if(loginStep === 1) {
+            console.log('[JS] Step 1: login check');
+            const username = document.getElementById('admin-username').value.trim();
+            const password = document.getElementById('admin-password').value;
+            if(!username || !password) {
+              document.getElementById('login-error').textContent = 'Tous les champs sont obligatoires.';
+              return false;
+            }
+            if(username !== ADMIN_USERNAME) {
+              console.log('[JS] Identifiant incorrect', username);
+              document.getElementById('login-error').textContent = 'Identifiant incorrect.';
+              return false;
+            }
+            if(password !== ADMIN_PASSWORD) {
+              console.log('[JS] Mot de passe incorrect', password);
+              document.getElementById('login-error').textContent = 'Mot de passe incorrect.';
+              return false;
+            }
+            if(password.length < 12 || !/[A-Z]/.test(password) || !/[a-z]/.test(password) || !/[0-9]/.test(password) || !/[^A-Za-z0-9]/.test(password)) {
+              console.log('[JS] Mot de passe trop faible', password);
+              document.getElementById('login-error').textContent = 'Mot de passe trop faible.';
+              return false;
+            }
+            // Vérification reCAPTCHA
+            var recaptchaResponse = grecaptcha.getResponse();
+            if(!recaptchaResponse) {
+              document.getElementById('login-error').textContent = 'Merci de valider le captcha Google.';
+              return false;
+            }
+            // Succès : accès admin
+            localStorage.setItem('admin-auth', 'ok');
+            document.getElementById('sms-debug').textContent = '';
+            console.log('[JS] Connexion réussie, redirection admin.html');
+            window.location.href = 'admin.html';
+          }
+        } catch (err) {
+          console.error('[JS] Exception dans le submit:', err);
+          document.getElementById('login-error').textContent = 'Erreur technique : ' + err.message;
+          document.getElementById('login-btn').disabled = false;
+        }
+    };
+  </script>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</body>
+</html>

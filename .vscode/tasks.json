@@ -1,0 +1,16 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"label": "Ouvre index.html dans le navigateur",
+			"command": "start src\\index.html"
+		},
+		{
+			"label": "Démarrer le backend SL AUTO",
+			"type": "shell",
+			"command": "node sl-auto-backend/server.js",
+			"isBackground": true
+		}
+	]
+}

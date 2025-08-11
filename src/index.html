@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>SL AUTO - Garage Automobile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Flatpickr Calendar CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+<body>
+    <div id="page-loader" class="loader-premium">
+      <div class="loader-wheel-premium">
+        <img src="assets/loader-wheel.svg" alt="Chargement..." />
+        <div class="loader-light"></div>
+      </div>
+    </div>
+    <style>
+    .loader-premium {
+      display: flex;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: radial-gradient(ellipse at center, #23272a 80%, #111 100%);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.4s;
+      opacity: 1;
+    }
+    .loader-wheel-premium {
+      position: relative;
+      width: 110px; height: 110px;
+      display: flex; justify-content: center; align-items: center;
+    }
+    .loader-wheel-premium img {
+      width: 90px;
+      box-shadow: 0 4px 32px #eab30855, 0 2px 12px #23272a99;
+      border-radius: 50%;
+      background: #23272a;
+      padding: 12px;
+      animation: spin 1.1s linear infinite;
+    }
+    .loader-light {
+      position: absolute;
+      top: 0; left: 0;
+      width: 110px; height: 110px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, #eab30844 0deg 60deg, transparent 60deg 360deg);
+      animation: rotate-light 1.1s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+    @keyframes rotate-light { 100% { transform: rotate(360deg); } }
+    </style>
+    <script>
+window.addEventListener('load', function() {
+    setTimeout(function() {
+        document.getElementById('page-loader').style.opacity = 0;
+        setTimeout(function() {
+            document.getElementById('page-loader').style.display = 'none';
+        }, 400);
+    }, 900);
+});
+document.querySelectorAll('.mechanic-nav a').forEach(link => {
+    link.addEventListener('click', function(e) {
+        if (this.getAttribute('href') && !this.getAttribute('href').startsWith('#')) {
+            document.getElementById('page-loader').style.opacity = 1;
+            document.getElementById('page-loader').style.display = 'flex';
+        }
+    });
+});
+    </script>
+    <header class="mechanic-header">
+    <div class="header-content mechanic-header-content">
+      <div class="logo mechanic-logo">
+  <img src="assets/logo1.png" alt="Logo SL AUTO" class="logo-img">
+      </div>
+      <h1 class="mechanic-title">SL AUTO 86</h1>
+    </div>
+        <nav class="mechanic-nav">
+  <a href="index.html" class="active">Accueil</a>
+  <a href="rdv.html">Prendre rendez-vous</a>
+  <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+    <main>
+        <section id="hero">
+      <video autoplay loop muted playsinline id="hero-bg-video">
+        <source src="assets/garage-animated.mp4" type="video/mp4">
+      </video>
+      <div class="hero-content">
+        <h2>Votre garage de confiance</h2>
+        <p>Entretien, réparation et expertise automobile à votre service.</p>
+        <button class="cta-btn" id="cta-rdv-popup">Prendre rendez-vous</button>
+      </div>
+        </section>
+        <section id="services">
+      <h2>Nos Services</h2>
+      <div class="services-list">
+        <div class="service-card revision-bg">
+          <div class="service-card-content">
+            <h3>Grosse mécanique</h3>
+            <p>Interventions lourdes et techniques réalisées sur des systèmes mécaniques complexes.</p>
+          </div>
+        </div>
+        <div class="service-card diag-bg">
+          <div class="service-card-content">
+            <h3>Diagnostic</h3>
+            <p>Diagnostic électronique et mécanique précis.</p>
+          </div>
+        </div>
+        <div class="service-card carrosserie-bg">
+          <div class="service-card-content">
+            <h3>Révision</h3>
+            <p>Entretien complet et contrôle technique.</p>
+          </div>
+        </div>
+      </div>
+        </section>
+        <section id="rdv">
+            <!-- Formulaire déplacé sur rdv.html -->
+            <div id="planning">
+                <h3>Planning des rendez-vous</h3>
+                <ul id="rdv-list"></ul>
+            </div>
+        </section>
+    </main>
+    <footer>
+  <p>&copy; 2025 SL AUTO - Tous droits réservés</p>
+    </footer>
+    <script src="js/main.js"></script>
+</body>
+<!-- Flatpickr Calendar JS + French locale -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js"></script>
+<script>
+// --- Gestion avancée des créneaux de rendez-vous ---
+const SERVICE_DURATIONS = {
+  'Révision': 5,
+  'Diagnostic': 2,
+  'Carrosserie': 12
+};
+
+function getReservedSlotsWithDuration() {
+  const rdvs = JSON.parse(localStorage.getItem('rdvs') || '[]');
+  // On ne prend que les rendez-vous validés
+  return rdvs.filter(r => r.statut === 'validé').map(r => {
+    const start = new Date(r.date.replace(' ', 'T'));
+    const duration = SERVICE_DURATIONS[r.service] || 1;
+    return {
+      start,
+      end: new Date(start.getTime() + duration * 60 * 60 * 1000)
+    };
+  });
+}
+
+function isSlotAvailable(date, service) {
+  // Jour ouvré ?
+  const day = date.getDay();
+  if (day === 0 || day === 6) return false; // 0=dimanche, 6=samedi
+  // Heure ouvrée ?
+  const hour = date.getHours();
+  if (hour < 9 || hour >= 18) return false;
+  // Délai minimum 24h
+  const now = new Date();
+  if (date.getTime() < now.getTime() + 24*60*60*1000) return false;
+  // Doit finir avant 18h
+  const duration = SERVICE_DURATIONS[service] || 1;
+  const slotStart = date;
+  const slotEnd = new Date(slotStart.getTime() + duration * 60 * 60 * 1000);
+  if (slotEnd.getHours() > 18 || (slotEnd.getHours() === 18 && slotEnd.getMinutes() > 0)) return false;
+  // On ne bloque PAS les créneaux déjà demandés, seulement ceux validés (voir getReservedSlotsWithDuration)
+  return true;
+}
+
+let selectedService = 'Révision';
+
+
+const fp = flatpickr("#date", {
+  enableTime: true,
+  dateFormat: "Y-m-d H:i",
+  time_24hr: true,
+  minuteIncrement: 15,
+  locale: flatpickr.l10ns.fr,
+  minDate: "today",
+  // Pas de disable JS, tout est vérifié à la soumission
+});
+
+// Validation côté JS du créneau choisi lors de la soumission du formulaire
+const form = document.getElementById('rdv-form');
+if(form) {
+  form.addEventListener('submit', function(e) {
+    const dateInput = document.getElementById('date');
+    const serviceInput = document.getElementById('service');
+    const dateStr = dateInput.value;
+    const service = serviceInput.value;
+    if(dateStr && service) {
+      const date = new Date(dateStr.replace(' ', 'T'));
+      // Vérification détaillée
+      const day = date.getDay();
+      if (day === 0 || day === 6) {
+        e.preventDefault();
+        alert("❌ Les rendez-vous ne sont possibles que du lundi au vendredi.");
+        return false;
+      }
+      const hour = date.getHours();
+      if (hour < 9) {
+        e.preventDefault();
+        alert("❌ Les rendez-vous ne peuvent pas être pris avant 9h du matin.");
+        return false;
+      }
+      // Délai minimum 24h
+      const now = new Date();
+      if (date.getTime() < now.getTime() + 24*60*60*1000) {
+        e.preventDefault();
+        alert("❌ Vous devez réserver au moins 24h à l'avance.");
+        return false;
+      }
+      // Doit finir avant 18h, et pas commencer trop tard
+      const duration = SERVICE_DURATIONS[service] || 1;
+      const slotEnd = new Date(date.getTime() + duration * 60 * 60 * 1000);
+      if (slotEnd.getHours() > 18 || (slotEnd.getHours() === 18 && slotEnd.getMinutes() > 0)) {
+        e.preventDefault();
+        alert("❌ Ce service est trop long pour finir avant 18h. Merci de choisir un créneau plus tôt.");
+        return false;
+      }
+      // Interdiction de commencer un service moins de 2h avant la fermeture
+      if (hour >= 16) {
+        // Pour tous les services, on interdit de commencer à partir de 16h (18h-2h)
+        e.preventDefault();
+        alert("❌ Vous ne pouvez pas réserver un créneau moins de 2h avant la fermeture (18h). Merci de choisir un horaire plus tôt.");
+        return false;
+      }
+      // On ne bloque PAS les créneaux déjà demandés, seulement ceux validés
+      // (la logique de chevauchement n'est appliquée qu'aux validés)
+    }
+  });
+}
+</script>
+<script>
+// Désactive clic droit
+window.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+// Désactive F12, Ctrl+Shift+I, Ctrl+U
+window.addEventListener('keydown', function(e) {
+    if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') || (e.ctrlKey && e.key.toLowerCase() === 'u')) {
+        e.preventDefault();
+        return false;
+    }
+});
+</script>
+<!-- Popup formulaire RDV -->
+
+<style>
+#rdv-popup {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  z-index: 99999;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(ellipse at center, #23272a 80%, #111 100%);
+  animation: fadeInBg 0.5s;
+}
+@keyframes fadeInBg { from { opacity: 0; } to { opacity: 1; } }
+.rdv-popup-content {
+  background: linear-gradient(135deg, #fffbe6 0%, #fff 100%);
+  padding: 38px 24px 28px 24px;
+  border-radius: 22px;
+  max-width: 420px;
+  width: 98vw;
+  box-shadow: 0 6px 36px #eab30888, 0 2px 12px #23272a55;
+  position: relative;
+  animation: popupAppear 0.5s;
+}
+@keyframes popupAppear { from { transform: scale(0.92); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.rdv-popup-content h2 {
+  color: #23272a;
+  text-align: center;
+  margin-bottom: 22px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+#close-rdv-popup {
+  position: absolute;
+  top: 12px; right: 12px;
+  background: #eab308;
+  color: #23272a;
+  border: none;
+  border-radius: 8px;
+  padding: 4px 12px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 8px #23272a22;
+  transition: background 0.2s;
+}
+#close-rdv-popup:hover {
+  background: #ffd700;
+}
+#rdv-form-index {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+#rdv-form-index input,
+#rdv-form-index select {
+  width: 100%;
+  padding: 10px 14px 10px 38px;
+  border: 1.5px solid #eab308;
+  border-radius: 10px;
+  background: #fff;
+  font-size: 1rem;
+  color: #23272a;
+  box-shadow: 0 1px 6px #eab30822;
+  transition: border 0.2s, box-shadow 0.2s;
+  outline: none;
+  position: relative;
+}
+#rdv-form-index input:focus,
+#rdv-form-index select:focus {
+  border-color: #23272a;
+  box-shadow: 0 2px 12px #eab30844;
+}
+#rdv-form-index input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.7) sepia(1) saturate(5) hue-rotate(10deg);
+}
+#rdv-form-index button[type="submit"] {
+  width: 100%;
+  background: linear-gradient(90deg, #eab308 60%, #ffd700 100%);
+  color: #23272a;
+  font-weight: bold;
+  padding: 12px 0;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  box-shadow: 0 2px 12px #eab30855;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+#rdv-form-index button[type="submit"]:hover {
+  background: linear-gradient(90deg, #ffd700 60%, #eab308 100%);
+  box-shadow: 0 4px 18px #eab30899;
+}
+.rdv-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.1em;
+  color: #eab308;
+  pointer-events: none;
+}
+.rdv-field {
+  position: relative;
+}
+</style>
+<div id="rdv-popup">
+  <div class="rdv-popup-content">
+    <button id="close-rdv-popup">X</button>
+    <h2>Prendre rendez-vous</h2>
+    <form id="rdv-form-index">
+      <div class="rdv-field"><span class="rdv-icon">&#128100;</span><input type="text" name="lastname" placeholder="Nom" required></div>
+      <div class="rdv-field"><span class="rdv-icon">&#128100;</span><input type="text" name="firstname" placeholder="Prénom" required></div>
+      <div class="rdv-field"><span class="rdv-icon">&#128663;</span><input type="text" name="vehicule" placeholder="Véhicule" required></div>
+      <div class="rdv-field"><span class="rdv-icon">&#128661;</span>
+        <select name="categorie" required>
+          <option value="">Catégorie...</option>
+          <option value="Citadine">Citadine</option>
+          <option value="Berline">Berline</option>
+          <option value="SUV">SUV</option>
+          <option value="Utilitaire">Utilitaire</option>
+          <option value="Autre">Autre</option>
+        </select>
+      </div>
+      <div class="rdv-field"><span class="rdv-icon">&#9993;</span><input type="email" name="email" placeholder="Email" required></div>
+      <div class="rdv-field"><span class="rdv-icon">&#128222;</span><input type="tel" name="phone" placeholder="Téléphone" required></div>
+      <div class="rdv-field"><span class="rdv-icon">&#9881;</span>
+        <select name="service" required>
+          <option value="">Service...</option>
+          <option value="Révision">Révision</option>
+          <option value="Diagnostic">Diagnostic</option>
+          <option value="Carrosserie">Carrosserie</option>
+        </select>
+      </div>
+      <div class="rdv-field"><span class="rdv-icon">&#128197;</span><input type="datetime-local" name="date" required></div>
+      <button type="submit">Valider</button>
+    </form>
+  </div>
+</div>
+<script>
+document.getElementById('cta-rdv-popup').addEventListener('click', function() {
+  document.getElementById('rdv-popup').style.display = 'flex';
+});
+document.getElementById('close-rdv-popup').addEventListener('click', function() {
+  document.getElementById('rdv-popup').style.display = 'none';
+});
+document.getElementById('rdv-form-index').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const data = Object.fromEntries(new FormData(this));
+  fetch('http://localhost:3001/rdvs', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  })
+  .then(res => {
+    if(!res.ok) throw new Error('Erreur lors de la prise de rendez-vous');
+    return res.json();
+  })
+  .then(rdv => {
+    document.getElementById('rdv-popup').style.display = 'none';
+    showRdvConfirmation(new Date(rdv.date).toLocaleString('fr-FR'));
+  })
+  .catch(err => {
+    alert('Erreur serveur: ' + err.message);
+  });
+});
+</script>
+</body>
+</html>

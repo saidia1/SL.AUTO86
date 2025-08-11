@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Prendre Rendez-vous - SL AUTO</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+<body>
+    <div id="page-loader" class="loader-premium">
+      <div class="loader-wheel-premium">
+        <img src="assets/loader-wheel.svg" alt="Chargement..." />
+        <div class="loader-light"></div>
+      </div>
+    </div>
+    <style>
+    .loader-premium {
+      display: flex;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: radial-gradient(ellipse at center, #23272a 80%, #111 100%);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.4s;
+      opacity: 1;
+    }
+    .loader-wheel-premium {
+      position: relative;
+      width: 110px; height: 110px;
+      display: flex; justify-content: center; align-items: center;
+    }
+    .loader-wheel-premium img {
+      width: 90px;
+      box-shadow: 0 4px 32px #eab30855, 0 2px 12px #23272a99;
+      border-radius: 50%;
+      background: #23272a;
+      padding: 12px;
+      animation: spin 1.1s linear infinite;
+    }
+    .loader-light {
+      position: absolute;
+      top: 0; left: 0;
+      width: 110px; height: 110px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, #eab30844 0deg 60deg, transparent 60deg 360deg);
+      animation: rotate-light 1.1s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+    @keyframes rotate-light { 100% { transform: rotate(360deg); } }
+    </style>
+    <header class="mechanic-header">
+        <div class="header-content mechanic-header-content">
+            <div class="logo mechanic-logo">
+                <a href="index.html"><img src="assets/logo1.png" alt="Logo SL AUTO" class="logo-img"></a>
+            </div>
+            <h1 class="mechanic-title">SL AUTO 86</h1>
+        </div>
+        <nav class="mechanic-nav">
+            <a href="index.html">Accueil</a>
+            <a href="rdv.html">Prendre rendez-vous</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+    <main>
+        <section id="rdv">
+            <h2 style="text-align:center;margin-bottom:10px;">Formulaire de réservation</h2>
+            <p style="text-align:center;color:#23272a;font-size:1.08em;margin-bottom:22px;max-width:480px;margin-left:auto;margin-right:auto;">
+              Remplissez ce formulaire pour réserver un créneau dans notre garage. <br>
+              Les rendez-vous sont disponibles du lundi au vendredi, de 9h à 18h. <br>
+              Un email de confirmation vous sera envoyé après validation.
+            </p>
+            <form id="rdv-form" style="max-width:420px;margin:32px auto;">
+              <div style="margin-bottom:18px;padding:12px 10px;background:#fffbe6;border-radius:12px;border:1px solid #eab30833;box-shadow:0 2px 8px #eab30822;display:flex;flex-direction:column;">
+                <span style="color:#eab308;font-size:1em;font-weight:500;margin-bottom:4px;">Votre nom de famille.</span>
+                <label for="lastname" style="font-weight:500;color:#23272a;margin-bottom:6px;font-size:1.05em;">Nom :</label>
+                <input type="text" id="lastname" name="lastname" required style="padding:10px 12px;border-radius:8px;border:1px solid #eab30855;font-size:1em;background:#f8fafc;color:#23272a;">
+              </div>
+              <div style="margin-bottom:18px;padding:12px 10px;background:#fffbe6;border-radius:12px;border:1px solid #eab30833;box-shadow:0 2px 8px #eab30822;display:flex;flex-direction:column;">
+                <span style="color:#eab308;font-size:1em;font-weight:500;margin-bottom:4px;">Votre prénom usuel.</span>
+                <label for="firstname" style="font-weight:500;color:#23272a;margin-bottom:6px;font-size:1.05em;">Prénom :</label>
+                <input type="text" id="firstname" name="firstname" required style="padding:10px 12px;border-radius:8px;border:1px solid #eab30855;font-size:1em;background:#f8fafc;color:#23272a;">
+              </div>
+              <div style="margin-bottom:18px;padding:12px 10px;background:#fffbe6;border-radius:12px;border:1px solid #eab30833;box-shadow:0 2px 8px #eab30822;display:flex;flex-direction:column;">
+                <span style="color:#eab308;font-size:1em;font-weight:500;margin-bottom:4px;">Marque et modèle du véhicule (ex : Peugeot 208).</span>
+                <label for="vehicule" style="font-weight:500;color:#23272a;margin-bottom:6px;font-size:1.05em;">Véhicule :</label>
+                <input type="text" id="vehicule" name="vehicule" required style="padding:10px 12px;border-radius:8px;border:1px solid #eab30855;font-size:1em;background:#f8fafc;color:#23272a;">
+              </div>
+              <div style="margin-bottom:18px;padding:12px 10px;background:#fffbe6;border-radius:12px;border:1px solid #eab30833;box-shadow:0 2px 8px #eab30822;display:flex;flex-direction:column;">
+                <span style="color:#eab308;font-size:1em;font-weight:500;margin-bottom:4px;">Type de véhicule (citadine, SUV, utilitaire...)</span>
+                <label for="categorie" style="font-weight:500;color:#23272a;margin-bottom:6px;font-size:1.05em;">Catégorie :</label>
+                <select id="categorie" name="categorie" required style="padding:10px 12px;border-radius:8px;border:1px solid #eab30855;font-size:1em;background:#f8fafc;color:#23272a;">
+                  <option value="">Catégorie...</option>
+                  <option value="Citadine">Citadine</option>
+                  <option value="Berline">Berline</option>
+                  <option value="SUV">SUV</option>
+                  <option value="Utilitaire">Utilitaire</option>
+                  <option value="Autre">Autre</option>
+                </select>
+              </div>
+              <div style="margin-bottom:18px;padding:12px 10px;background:#fffbe6;border-radius:12px;border:1px solid #eab30833;box-shadow:0 2px 8px #eab30822;display:flex;flex-direction:column;">
+                <span style="color:#eab308;font-size:1em;font-weight:500;margin-bottom:4px;">Pour recevoir la confirmation et les infos du rendez-vous.</span>
+                <label for="email" style="font-weight:500;color:#23272a;margin-bottom:6px;font-size:1.05em;">Email :</label>
+                <input type="email" id="email" name="email" required style="padding:10px 12px;border-radius:8px;border:1px solid #eab30855;font-size:1em;background:#f8fafc;color:#23272a;">
+              </div>
+              <div style="margin-bottom:18px;padding:12px 10px;background:#fffbe6;border-radius:12px;border:1px solid #eab30833;box-shadow:0 2px 8px #eab30822;display:flex;flex-direction:column;">
+                <span style="color:#eab308;font-size:1em;font-weight:500;margin-bottom:4px;">Pour vous joindre en cas de besoin ou rappel.</span>
+                <label for="phone" style="font-weight:500;color:#23272a;margin-bottom:6px;font-size:1.05em;">Téléphone :</label>
+                <input type="tel" id="phone" name="phone" required style="padding:10px 12px;border-radius:8px;border:1px solid #eab30855;font-size:1em;background:#f8fafc;color:#23272a;">
+              </div>
+              <div style="margin-bottom:18px;padding:12px 10px;background:#fffbe6;border-radius:12px;border:1px solid #eab30833;box-shadow:0 2px 8px #eab30822;display:flex;flex-direction:column;">
+                <span style="color:#eab308;font-size:1em;font-weight:500;margin-bottom:4px;">Choisissez le type d’intervention souhaitée.</span>
+                <label for="service" style="font-weight:500;color:#23272a;margin-bottom:6px;font-size:1.05em;">Service :</label>
+                <select id="service" name="service" required style="padding:10px 12px;border-radius:8px;border:1px solid #eab30855;font-size:1em;background:#f8fafc;color:#23272a;">
+                  <option value="">Service...</option>
+                  <option value="Révision">Révision</option>
+                  <option value="Diagnostic">Diagnostic</option>
+                  <option value="Carrosserie">Carrosserie</option>
+                </select>
+              </div>
+              <div style="margin-bottom:18px;padding:12px 10px;background:#fffbe6;border-radius:12px;border:1px solid #eab30833;box-shadow:0 2px 8px #eab30822;display:flex;flex-direction:column;">
+                <span style="color:#eab308;font-size:1em;font-weight:500;margin-bottom:4px;">Sélectionnez le créneau souhaité (du lundi au vendredi, 9h-18h).</span>
+                <label for="date" style="font-weight:500;color:#23272a;margin-bottom:6px;font-size:1.05em;">Date et heure :</label>
+                <input type="datetime-local" id="date" name="date" required style="padding:10px 12px;border-radius:8px;border:1px solid #eab30855;font-size:1em;background:#f8fafc;color:#23272a;">
+              </div>
+              <button type="submit" style="width:100%;background:linear-gradient(90deg,#eab308 80%,#facc15 100%);color:#23272a;font-weight:bold;padding:12px 0;border:none;border-radius:8px;font-size:1.1em;box-shadow:0 2px 12px #eab30833;cursor:pointer;transition:background 0.2s;">Valider</button>
+            </form>
+            <!-- Calendrier supprimé -->
+        </section>
+    </main>
+    <script type="module" src="js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+window.addEventListener('load', function() {
+    setTimeout(function() {
+        document.getElementById('page-loader').style.opacity = 0;
+        setTimeout(function() {
+            document.getElementById('page-loader').style.display = 'none';
+        }, 400);
+    }, 900);
+});
+document.querySelectorAll('.mechanic-nav a').forEach(link => {
+    link.addEventListener('click', function(e) {
+        if (this.getAttribute('href') && !this.getAttribute('href').startsWith('#')) {
+            document.getElementById('page-loader').style.opacity = 1;
+            document.getElementById('page-loader').style.display = 'flex';
+        }
+    });
+});
+    </script>
+    <script>
+            // Récupère les créneaux validés depuis l'API backend et bloque leur sélection
+            fetch('http://localhost:3001/rdvs')
+              .then(res => res.json())
+              .then(data => {
+                // Créneaux validés par date (clé: 'YYYY-MM-DD', valeurs: ['HH:mm', ...])
+                const slotsByDay = {};
+                data.filter(r => r.statut === 'validé').forEach(r => {
+                  const [day, time] = r.date.split('T');
+                  if (!slotsByDay[day]) slotsByDay[day] = [];
+                  slotsByDay[day].push(time.slice(0,5));
+                });
+                flatpickr("#date", {
+                  enableTime: true,
+                  dateFormat: "Y-m-d H:i",
+                  time_24hr: true,
+                  minDate: "today",
+                  locale: {
+                    firstDayOfWeek: 1,
+                    weekdays: {
+                      shorthand: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
+                      longhand: ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"]
+                    },
+                    months: {
+                      shorthand: ["Janv", "Févr", "Mars", "Avr", "Mai", "Juin", "Juil", "Août", "Sept", "Oct", "Nov", "Déc"],
+                      longhand: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"]
+                    }
+                  },
+                  disable: [
+                    function(date) {
+                      // Désactive samedi (6), dimanche (0) et les dates passées
+                      const today = new Date();
+                      today.setHours(0,0,0,0);
+                      if (date.getDay() === 0 || date.getDay() === 6 || date < today) return true;
+                      return false;
+                    }
+                  ],
+                  onReady: function(selectedDates, dateStr, instance) {
+                    // Hook pour griser les horaires déjà validés lors de l'ouverture du time picker
+                    instance.config.onValueUpdate.push(function(selDates, selStr, inst) {
+                      const day = inst.input.value.split(' ')[0];
+                      const times = slotsByDay[day] || [];
+                      setTimeout(() => {
+                        document.querySelectorAll('.flatpickr-time .flatpickr-hour, .flatpickr-time .flatpickr-minute').forEach(el => {
+                          el.disabled = false;
+                          el.classList.remove('rdv-taken');
+                        });
+                        if (times.length > 0) {
+                          // Pour chaque créneau pris, grise l'heure correspondante
+                          document.querySelectorAll('.flatpickr-time input').forEach(input => {
+                            if (input.classList.contains('flatpickr-hour')) {
+                              if (times.some(t => t.split(':')[0] === input.value)) {
+                                input.disabled = true;
+                                input.classList.add('rdv-taken');
+                              }
+                            }
+                            if (input.classList.contains('flatpickr-minute')) {
+                              if (times.some(t => t.split(':')[1] === input.value)) {
+                                input.disabled = true;
+                                input.classList.add('rdv-taken');
+                              }
+                            }
+                          });
+                        }
+                      }, 10);
+                    });
+                  }
+                });
+              });
+    </script>
+<script>
+// Désactive clic droit
+window.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+// Désactive F12, Ctrl+Shift+I, Ctrl+U
+window.addEventListener('keydown', function(e) {
+    if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') || (e.ctrlKey && e.key.toLowerCase() === 'u')) {
+        e.preventDefault();
+        return false;
+    }
+});
+document.getElementById('rdv-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const data = Object.fromEntries(new FormData(this));
+  fetch('http://localhost:3001/rdvs', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  })
+  .then(res => {
+    if(!res.ok) throw new Error('Erreur lors de la prise de rendez-vous');
+    return res.json();
+  })
+  .then(rdv => {
+    showRdvConfirmation(new Date(rdv.date).toLocaleString('fr-FR'));
+    document.getElementById('rdv-form').reset();
+  })
+  .catch(err => {
+    alert('Erreur serveur: ' + err.message);
+  });
+});
+
+// Confirmation visuelle comme sur index.html
+function showRdvConfirmation(dateStr) {
+  const popup = document.createElement('div');
+  popup.style.position = 'fixed';
+  popup.style.top = '0';
+  popup.style.left = '0';
+  popup.style.width = '100vw';
+  popup.style.height = '100vh';
+  popup.style.background = 'rgba(35,39,42,0.92)';
+  popup.style.zIndex = '99999';
+  popup.style.display = 'flex';
+  popup.style.justifyContent = 'center';
+  popup.style.alignItems = 'center';
+  popup.innerHTML = `<div style="background:#fff;padding:32px 18px;border-radius:18px;max-width:400px;width:98vw;box-shadow:0 4px 32px #eab30899;position:relative;text-align:center;">
+    <h2 style="color:#23272a;margin-bottom:18px;">✅ Rendez-vous confirmé !</h2>
+    <p style="color:#23272a;font-size:1.1em;margin-bottom:18px;">Votre rendez-vous a été enregistré pour le <br><b>${dateStr}</b></p>
+    <button id="close-confirm-popup" style="background:#eab308;color:#23272a;border:none;border-radius:8px;padding:8px 24px;font-weight:bold;cursor:pointer;">Fermer</button>
+  </div>`;
+  document.body.appendChild(popup);
+  document.getElementById('close-confirm-popup').onclick = function() {
+    popup.remove();
+  };
+}
+
+// Bouton de fermeture du formulaire
+document.getElementById('close-rdv-form').addEventListener('click', function() {
+  document.getElementById('rdv-overlay').style.display = 'none';
+});
+</script>
+</body>
+</html>
