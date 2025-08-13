@@ -1,44 +1,64 @@
+
 const express = require('express');
-const fs = require('fs');
 const cors = require('cors');
+const mongoose = require('mongoose');
 const app = express();
-const PORT = 3001;
-const DATA_FILE = './rdvs.json';
+const PORT = process.env.PORT || 3001;
+
+// Connexion à MongoDB Atlas
+mongoose.connect('mongodb+srv://assoumanesaid:<b68Qha6w1zMYzTIv>@cluster0.3j5amy7.mongodb.net/slauto?retryWrites=true&w=majority&appName=Cluster0', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}).then(() => console.log('MongoDB connecté'))
+  .catch(err => console.error('Erreur MongoDB:', err));
+
+// Schéma Mongoose pour un rendez-vous
+const rdvSchema = new mongoose.Schema({
+  lastname: String,
+  firstname: String,
+  vehicule: String,
+  categorie: String,
+  email: String,
+  phone: String,
+  service: String,
+  date: String,
+  statut: { type: String, default: 'en attente' }
+});
+const Rdv = mongoose.model('Rdv', rdvSchema);
 
 app.use(cors());
 app.use(express.json());
 
-// Helper pour lire/écrire le fichier
-function readRdvs() {
-  if (!fs.existsSync(DATA_FILE)) return [];
-  return JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
-}
-function writeRdvs(rdvs) {
-  fs.writeFileSync(DATA_FILE, JSON.stringify(rdvs, null, 2));
-}
-
 // GET: liste tous les rdvs
-app.get('/rdvs', (req, res) => {
-  res.json(readRdvs());
+app.get('/rdvs', async (req, res) => {
+  try {
+    const rdvs = await Rdv.find();
+    res.json(rdvs);
+  } catch (err) {
+    res.status(500).json({ error: 'Erreur serveur' });
+  }
 });
 
 // POST: ajoute un rdv
-app.post('/rdvs', (req, res) => {
-  const rdvs = readRdvs();
-  const rdv = { ...req.body, statut: 'en attente', id: Date.now() };
-  rdvs.push(rdv);
-  writeRdvs(rdvs);
-  res.status(201).json(rdv);
+app.post('/rdvs', async (req, res) => {
+  try {
+    const rdv = new Rdv({ ...req.body });
+    await rdv.save();
+    res.status(201).json(rdv);
+  } catch (err) {
+    res.status(500).json({ error: 'Erreur serveur' });
+  }
 });
 
 // PATCH: modifie le statut d'un rdv
-app.patch('/rdvs/:id', (req, res) => {
-  const rdvs = readRdvs();
-  const idx = rdvs.findIndex(r => r.id == req.params.id);
-  if (idx === -1) return res.status(404).json({ error: 'Not found' });
-  rdvs[idx].statut = req.body.statut;
-  writeRdvs(rdvs);
-  res.json(rdvs[idx]);
+app.patch('/rdvs/:id', async (req, res) => {
+  try {
+    const rdv = await Rdv.findByIdAndUpdate(req.params.id, { statut: req.body.statut }, { new: true });
+    if (!rdv) return res.status(404).json({ error: 'Not found' });
+    res.json(rdv);
+  } catch (err) {
+    res.status(500).json({ error: 'Erreur serveur' });
+  }
 });
 
-app.listen(PORT, () => console.log('Serveur RDV sur http://localhost:' + PORT));
+app.listen(PORT, () => console.log('Serveur RDV (MongoDB) sur http://localhost:' + PORT));
