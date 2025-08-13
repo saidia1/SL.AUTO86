@@ -5,8 +5,8 @@ const mongoose = require('mongoose');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Connexion à MongoDB Atlas
-mongoose.connect('mongodb+srv://assoumanesaid:<b68Qha6w1zMYzTIv>@cluster0.3j5amy7.mongodb.net/slauto?retryWrites=true&w=majority&appName=Cluster0', {
+// Connexion à MongoDB Atlas via variable d'environnement
+mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(() => console.log('MongoDB connecté'))
