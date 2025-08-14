@@ -45,8 +45,11 @@
         <script src="src/js/admin.js"></script>
         <script>
             document.getElementById('logout-btn').onclick = function() {
-                localStorage.removeItem('admin-auth');
-                window.location.href = 'admin-login.html';
+                if(confirm('Voulez-vous vraiment vous déconnecter ?')) {
+                    localStorage.removeItem('admin-auth');
+                    // Force le rechargement pour vider le cache éventuel
+                    window.location.replace('admin-login.html');
+                }
             };
         </script>
 </body>
