@@ -8,16 +8,22 @@ document.addEventListener("DOMContentLoaded", () => {
 			tbody.innerHTML = "";
 			data.forEach(rdv => {
 				const tr = document.createElement("tr");
+				let statutColor = '';
+				if (rdv.statut === 'validé') statutColor = 'style="color:green;font-weight:bold"';
+				else if (rdv.statut === 'refusé') statutColor = 'style="color:red;font-weight:bold"';
+				else statutColor = 'style="color:orange;font-weight:bold"';
 				tr.innerHTML = `
 					<td>${rdv.lastname || ""} ${rdv.firstname || ""}</td>
 					<td>${rdv.email || ""}</td>
 					<td>${rdv.phone || ""}</td>
 					<td>${rdv.date || ""}</td>
 					<td>${rdv.service || ""}</td>
-					<td>${rdv.statut || ""}</td>
+					<td ${statutColor}>${rdv.statut || ""}</td>
 					<td>
-						<button class="valider-btn" data-id="${rdv._id}">Valider</button>
-						<button class="refuser-btn" data-id="${rdv._id}">Refuser</button>
+						${rdv.statut === 'en attente' ? `
+						<button class="valider-btn" data-id="${rdv._id}" style="background:#22c55e;color:#fff;border:none;padding:6px 14px;border-radius:6px;margin-right:6px;cursor:pointer;">Valider</button>
+						<button class="refuser-btn" data-id="${rdv._id}" style="background:#ef4444;color:#fff;border:none;padding:6px 14px;border-radius:6px;cursor:pointer;">Refuser</button>
+						` : '<span style="color:#888;">-</span>'}
 					</td>
 				`;
 				tbody.appendChild(tr);
