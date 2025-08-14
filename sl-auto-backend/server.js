@@ -26,7 +26,11 @@ const rdvSchema = new mongoose.Schema({
 });
 const Rdv = mongoose.model('Rdv', rdvSchema);
 
-app.use(cors());
+app.use(cors({
+  origin: ["https://saidia1.github.io"],
+  methods: ["GET", "POST", "PATCH"],
+  allowedHeaders: ["Content-Type"]
+}));
 app.use(express.json());
 
 // GET: liste tous les rdvs
