@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		.then(data => {
 			const tbody = document.querySelector("#rdv-table tbody");
 			tbody.innerHTML = "";
-			data.filter(rdv => rdv.statut === 'en attente').forEach(rdv => {
+			data.forEach(rdv => {
 				const tr = document.createElement("tr");
 				tr.innerHTML = `
 					<td>${rdv.lastname || ""} ${rdv.firstname || ""}</td>
