@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
 					<td>${rdv.phone || ""}</td>
 					<td>${rdv.service || ""}</td>
 					<td>${rdv.date || ""}</td>
-					<td ${statutColor}>${rdv.statut || ""}</td>
+					<td ${statutColor}>${rdv.statut || "en attente"}</td>
 					<td>
 						${rdv.statut === 'en attente' ? `
 						<button class="valider-btn" data-id="${rdv._id}" style="background:#22c55e;color:#fff;border:none;padding:6px 14px;border-radius:6px;margin-right:6px;cursor:pointer;">Valider</button>
