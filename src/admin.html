@@ -11,23 +11,54 @@
         <h1>Liste des rendez-vous</h1>
         <button id="logout-btn" style="background:#eab308;color:#23272a;font-weight:bold;border:none;padding:10px 22px;border-radius:8px;box-shadow:0 2px 8px #eab30844;cursor:pointer;transition:background 0.2s;">Déconnexion</button>
     </div>
-	<table id="rdv-table" border="1">
-		<thead>
-			<tr>
-				<th>Nom</th>
-				<th>Email</th>
-				<th>Téléphone</th>
-				<th>Date</th>
-				<th>Service</th>
-				<th>Statut</th>
-				<th>Actions</th>
-			</tr>
-		</thead>
-		<tbody>
-			<!-- Les rendez-vous seront insérés ici -->
-		</tbody>
-	</table>
-	<script src="src/js/admin.js"></script>
-	<script src="js/logout.js"></script>
+    <style>
+    #rdv-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fffbe6;
+      box-shadow: 0 4px 32px #eab30833;
+      border-radius: 14px;
+      overflow: hidden;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin-bottom: 32px;
+    }
+    #rdv-table th, #rdv-table td {
+      padding: 14px 10px;
+      text-align: left;
+      border-bottom: 1px solid #eab30833;
+    }
+    #rdv-table th {
+      background: linear-gradient(90deg, #eab308 0%, #fffbe6 100%);
+      color: #23272a;
+      font-size: 1.1em;
+      font-weight: bold;
+      border-bottom: 2px solid #eab30855;
+    }
+    #rdv-table tr:last-child td {
+      border-bottom: none;
+    }
+    #rdv-table tbody tr:hover {
+      background: #fff9d6;
+      transition: background 0.2s;
+    }
+    </style>
+    <table id="rdv-table">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Téléphone</th>
+                <th>Email</th>
+                <th>Service</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Les rendez-vous seront insérés ici -->
+        </tbody>
+    </table>
+    <script src="js/admin.js"></script>
+    <script src="js/logout.js"></script>
 </body>
 </html>

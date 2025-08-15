@@ -13,12 +13,12 @@ document.addEventListener("DOMContentLoaded", () => {
 				else if (rdv.statut === 'refusé') statutColor = 'style="color:red;font-weight:bold"';
 				else statutColor = 'style="color:orange;font-weight:bold"';
 				tr.innerHTML = `
-					<td>${rdv.lastname || ""} ${rdv.firstname || ""}</td>
-					<td>${rdv.email || ""}</td>
+					<td>${rdv.lastname || ""}</td>
+					<td>${rdv.firstname || ""}</td>
 					<td>${rdv.phone || ""}</td>
-					<td>${rdv.date || ""}</td>
+					<td>${rdv.email || ""}</td>
 					<td>${rdv.service || ""}</td>
-					<td ${statutColor}>${rdv.statut || ""}</td>
+					<td ${statutColor}>${rdv.date || ""}</td>
 					<td>
 						${rdv.statut === 'en attente' ? `
 						<button class="valider-btn" data-id="${rdv._id}" style="background:#22c55e;color:#fff;border:none;padding:6px 14px;border-radius:6px;margin-right:6px;cursor:pointer;">Valider</button>
