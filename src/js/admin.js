@@ -15,10 +15,11 @@ document.addEventListener("DOMContentLoaded", () => {
 				tr.innerHTML = `
 					<td>${rdv.lastname || ""}</td>
 					<td>${rdv.firstname || ""}</td>
-					<td>${rdv.phone || ""}</td>
 					<td>${rdv.email || ""}</td>
+					<td>${rdv.phone || ""}</td>
 					<td>${rdv.service || ""}</td>
-					<td ${statutColor}>${rdv.date || ""}</td>
+					<td>${rdv.date || ""}</td>
+					<td ${statutColor}>${rdv.statut || ""}</td>
 					<td>
 						${rdv.statut === 'en attente' ? `
 						<button class="valider-btn" data-id="${rdv._id}" style="background:#22c55e;color:#fff;border:none;padding:6px 14px;border-radius:6px;margin-right:6px;cursor:pointer;">Valider</button>
