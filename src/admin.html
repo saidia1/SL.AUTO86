@@ -17,22 +17,25 @@
       border-collapse: collapse;
       background: #fffbe6;
       box-shadow: 0 4px 32px #eab30833;
-      border-radius: 14px;
+      border-radius: 16px;
       overflow: hidden;
       font-family: 'Segoe UI', Arial, sans-serif;
       margin-bottom: 32px;
+      font-size: 1.08em;
+      letter-spacing: 0.01em;
     }
     #rdv-table th, #rdv-table td {
-      padding: 14px 10px;
+      padding: 16px 12px;
       text-align: left;
       border-bottom: 1px solid #eab30833;
     }
     #rdv-table th {
       background: linear-gradient(90deg, #eab308 0%, #fffbe6 100%);
       color: #23272a;
-      font-size: 1.1em;
+      font-size: 1.13em;
       font-weight: bold;
       border-bottom: 2px solid #eab30855;
+      text-shadow: 0 2px 8px #fff8;
     }
     #rdv-table tr:last-child td {
       border-bottom: none;
@@ -41,6 +44,12 @@
       background: #fff9d6;
       transition: background 0.2s;
     }
+    #rdv-table td {
+      transition: background 0.2s, color 0.2s;
+    }
+    #rdv-table td[style*='color:green'] { background: #e6fbe6; }
+    #rdv-table td[style*='color:red'] { background: #fde6e6; }
+    #rdv-table td[style*='color:orange'] { background: #fffbe6; }
     </style>
     <table id="rdv-table">
         <thead>
