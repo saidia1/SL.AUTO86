@@ -9,9 +9,10 @@ document.addEventListener("DOMContentLoaded", () => {
 			data.forEach(rdv => {
 				const tr = document.createElement("tr");
 				let statutColor = '';
-				if (rdv.statut === 'validé') statutColor = 'style="color:green;font-weight:bold"';
-				else if (rdv.statut === 'refusé') statutColor = 'style="color:red;font-weight:bold"';
-				else statutColor = 'style="color:orange;font-weight:bold"';
+				let badgeClass = '';
+				if (rdv.statut === 'validé') { statutColor = 'style="color:green;font-weight:bold"'; badgeClass = 'statut-badge valide'; }
+				else if (rdv.statut === 'refusé') { statutColor = 'style="color:red;font-weight:bold"'; badgeClass = 'statut-badge refuse'; }
+				else { statutColor = 'style="color:orange;font-weight:bold"'; badgeClass = 'statut-badge attente'; }
 				tr.innerHTML = `
 					<td>${rdv.lastname || ""}</td>
 					<td>${rdv.firstname || ""}</td>
@@ -19,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
 					<td>${rdv.phone || ""}</td>
 					<td>${rdv.service || ""}</td>
 					<td>${rdv.date || ""}</td>
-					<td ${statutColor}>${rdv.statut || "en attente"}</td>
+					<td><span class="${badgeClass}">${rdv.statut || "en attente"}</span></td>
 					<td>
 						${rdv.statut === 'en attente' ? `
 						<button class="valider-btn" data-id="${rdv._id}" style="background:#22c55e;color:#fff;border:none;padding:6px 14px;border-radius:6px;margin-right:6px;cursor:pointer;">Valider</button>
