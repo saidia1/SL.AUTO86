@@ -105,6 +105,19 @@
         <option value="">Sélectionner...</option>
         <option value="ampoule">Ampoule</option>
         <option value="phare">Phares antibrouillard</option>
+        <option value="batterie">Batterie</option>
+        <option value="plaquettes">Plaquettes de frein</option>
+        <option value="disques">Disques de frein</option>
+        <option value="pneus">Pneus</option>
+        <option value="embrayage">Embrayage</option>
+        <option value="alternateur">Alternateur</option>
+        <option value="courroie">Courroie de distribution</option>
+        <option value="filtre">Filtre à air</option>
+        <option value="huile">Huile moteur</option>
+        <option value="bougies">Bougies d'allumage</option>
+        <option value="essuieglace">Essuie-glace</option>
+        <option value="radiateur">Radiateur</option>
+        <option value="pompe">Pompe à eau</option>
       </select>
       <label for="immat">Immatriculation :</label>
       <input type="text" id="immat" name="immat" placeholder="AA-123-BB" required>
@@ -128,6 +141,58 @@
       phare: [
         { label: "Remplacement phare", value: "remplacement_phare", prix: 40 },
         { label: "Réglage alignement", value: "reglage_alignement", prix: 20 }
+      ],
+      batterie: [
+        { label: "Remplacement batterie", value: "remplacement_batterie", prix: 35 },
+        { label: "Test de charge", value: "test_charge", prix: 12 }
+      ],
+      plaquettes: [
+        { label: "Remplacement plaquettes", value: "remplacement_plaquettes", prix: 45 },
+        { label: "Nettoyage étriers", value: "nettoyage_etriers", prix: 18 }
+      ],
+      disques: [
+        { label: "Remplacement disques", value: "remplacement_disques", prix: 60 },
+        { label: "Contrôle usure", value: "controle_usure", prix: 10 }
+      ],
+      pneus: [
+        { label: "Montage pneus", value: "montage_pneus", prix: 25 },
+        { label: "Équilibrage", value: "equilibrage", prix: 15 }
+      ],
+      embrayage: [
+        { label: "Remplacement embrayage", value: "remplacement_embrayage", prix: 180 },
+        { label: "Purge hydraulique", value: "purge_hydraulique", prix: 30 }
+      ],
+      alternateur: [
+        { label: "Remplacement alternateur", value: "remplacement_alternateur", prix: 90 },
+        { label: "Test de charge", value: "test_charge_alt", prix: 15 }
+      ],
+      courroie: [
+        { label: "Remplacement courroie", value: "remplacement_courroie", prix: 120 },
+        { label: "Contrôle galets", value: "controle_galets", prix: 20 }
+      ],
+      filtre: [
+        { label: "Remplacement filtre à air", value: "remplacement_filtre", prix: 18 },
+        { label: "Nettoyage boîtier", value: "nettoyage_boiter", prix: 8 }
+      ],
+      huile: [
+        { label: "Vidange huile moteur", value: "vidange_huile", prix: 35 },
+        { label: "Remplacement filtre à huile", value: "remplacement_filtre_huile", prix: 12 }
+      ],
+      bougies: [
+        { label: "Remplacement bougies", value: "remplacement_bougies", prix: 28 },
+        { label: "Contrôle allumage", value: "controle_allumage", prix: 10 }
+      ],
+      essuieglace: [
+        { label: "Remplacement essuie-glace", value: "remplacement_essuieglace", prix: 10 },
+        { label: "Nettoyage pare-brise", value: "nettoyage_parebrise", prix: 5 }
+      ],
+      radiateur: [
+        { label: "Remplacement radiateur", value: "remplacement_radiateur", prix: 110 },
+        { label: "Purge circuit", value: "purge_circuit", prix: 25 }
+      ],
+      pompe: [
+        { label: "Remplacement pompe à eau", value: "remplacement_pompe", prix: 95 },
+        { label: "Contrôle étanchéité", value: "controle_etancheite", prix: 15 }
       ]
     };
     const mainOeuvre = 30; // Forfait main d'oeuvre
