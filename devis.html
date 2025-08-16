@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>DEVIS GRATUIT - SL AUTO</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    body {
+      background: linear-gradient(120deg, #f8fafc 0%, #e0e7ff 100%);
+      color: #23272a;
+      font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .devis-container {
+      max-width: 480px;
+      margin: 48px auto;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 8px 32px #eab30833;
+      padding: 36px 28px 28px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .devis-title {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #eab308;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    .devis-form label {
+      font-weight: 500;
+      color: #23272a;
+      margin-bottom: 4px;
+      display: block;
+    }
+    .devis-form input, .devis-form select {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1.5px solid #eab30855;
+      font-size: 1em;
+      background: #f8fafc;
+      color: #23272a;
+      margin-bottom: 12px;
+      box-sizing: border-box;
+    }
+    .devis-form .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      margin-bottom: 18px;
+    }
+    .devis-form .checkbox-group label {
+      font-weight: 400;
+      color: #23272a;
+      margin-bottom: 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .devis-form .total {
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #22c55e;
+      text-align: right;
+      margin-top: 10px;
+    }
+    .devis-form button[type="submit"] {
+      width: 100%;
+      background: linear-gradient(90deg, #eab308 80%, #facc15 100%);
+      color: #23272a;
+      font-weight: bold;
+      padding: 12px 0;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1em;
+      box-shadow: 0 2px 12px #eab30833;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .devis-form button[type="submit"]:hover {
+      background: linear-gradient(90deg, #facc15 80%, #eab308 100%);
+    }
+    .vehicule-info {
+      background: #fffbe6;
+      border-radius: 10px;
+      padding: 10px 14px;
+      margin-bottom: 12px;
+      color: #23272a;
+      font-size: 0.98em;
+      box-shadow: 0 1px 6px #eab30822;
+    }
+  </style>
+</head>
+<body>
+  <div class="devis-container">
+    <div class="devis-title">DEVIS GRATUIT - TARIF PIÈCE AUTOMOBILE</div>
+    <form class="devis-form" id="devis-form">
+      <label for="type-piece">Type de pièce :</label>
+      <select id="type-piece" name="type-piece" required>
+        <option value="">Sélectionner...</option>
+        <option value="ampoule">Ampoule</option>
+        <option value="phare">Phares antibrouillard</option>
+      </select>
+      <label for="immat">Immatriculation :</label>
+      <input type="text" id="immat" name="immat" placeholder="AA-123-BB" required>
+      <div id="vehicule-info" class="vehicule-info" style="display:none;"></div>
+      <label for="email">Email :</label>
+      <input type="email" id="email" name="email" required>
+      <div class="checkbox-group" id="reparations-group">
+        <!-- Cases à cocher dynamiques -->
+      </div>
+      <div class="total" id="total">Total : 0 €</div>
+      <button type="submit">Obtenir mon devis</button>
+    </form>
+  </div>
+  <script>
+    // Réparations disponibles selon le type de pièce
+    const reparationsData = {
+      ampoule: [
+        { label: "Remplacement ampoule", value: "remplacement_ampoule", prix: 15 },
+        { label: "Vérification circuit", value: "verif_circuit", prix: 10 }
+      ],
+      phare: [
+        { label: "Remplacement phare", value: "remplacement_phare", prix: 40 },
+        { label: "Réglage alignement", value: "reglage_alignement", prix: 20 }
+      ]
+    };
+    const mainOeuvre = 30; // Forfait main d'oeuvre
+    const form = document.getElementById('devis-form');
+    const typePiece = document.getElementById('type-piece');
+    const reparationsGroup = document.getElementById('reparations-group');
+    const totalDiv = document.getElementById('total');
+    const immatInput = document.getElementById('immat');
+    const vehiculeInfoDiv = document.getElementById('vehicule-info');
+
+    // Générer les cases à cocher selon le type de pièce
+    typePiece.addEventListener('change', function() {
+      reparationsGroup.innerHTML = '';
+      const repList = reparationsData[typePiece.value] || [];
+      repList.forEach(rep => {
+        const label = document.createElement('label');
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.value = rep.value;
+        checkbox.setAttribute('data-prix', rep.prix);
+        label.appendChild(checkbox);
+        label.appendChild(document.createTextNode(rep.label + ' (' + rep.prix + ' €)'));
+        reparationsGroup.appendChild(label);
+      });
+      updateTotal();
+    });
+
+    // Calcul du total
+    reparationsGroup.addEventListener('change', updateTotal);
+    function updateTotal() {
+      let total = 0;
+      reparationsGroup.querySelectorAll('input[type=checkbox]:checked').forEach(cb => {
+        total += parseFloat(cb.getAttribute('data-prix'));
+      });
+      if(total > 0) total += mainOeuvre;
+      totalDiv.textContent = 'Total : ' + total + ' €';
+    }
+
+    // API d'immatriculation (mock ou vraie API)
+    immatInput.addEventListener('blur', function() {
+      const immat = immatInput.value.trim();
+      if(!immat) return;
+      // Exemple d'appel API (ici mock)
+      vehiculeInfoDiv.style.display = 'block';
+      vehiculeInfoDiv.textContent = 'Recherche du véhicule...';
+      // Remplacer par une vraie API si besoin
+      setTimeout(() => {
+        // Mock : déduire le véhicule de l’immat (exemple)
+        if(immat.toUpperCase().startsWith('AA')) {
+          vehiculeInfoDiv.textContent = 'Peugeot 208 - Essence - 2019';
+        } else if(immat.toUpperCase().startsWith('BB')) {
+          vehiculeInfoDiv.textContent = 'Renault Clio - Diesel - 2017';
+        } else {
+          vehiculeInfoDiv.textContent = 'Véhicule inconnu (saisie manuelle possible lors du RDV)';
+        }
+      }, 900);
+    });
+
+    // Empêcher l'envoi réel du formulaire
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Votre demande de devis a bien été envoyée ! Vous recevrez une réponse par email.');
+      form.reset();
+      vehiculeInfoDiv.style.display = 'none';
+      totalDiv.textContent = 'Total : 0 €';
+      reparationsGroup.innerHTML = '';
+    });
+  </script>
+</body>
+</html>
