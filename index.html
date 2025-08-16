@@ -125,6 +125,16 @@ document.querySelectorAll('.mechanic-nav a').forEach(link => {
               <label for="immat" style="font-size:1.08em;">Immatriculation :</label>
               <input type="text" id="immat" name="immat" placeholder="AA-123-BB" required style="font-size:1.08em;padding:12px 14px;border-radius:10px;">
               <div id="vehicule-info" class="vehicule-info" style="display:none;background:#fffbe6;border-radius:10px;padding:10px 14px;margin-top:8px;color:#23272a;font-size:1em;box-shadow:0 1px 6px #eab30822;"></div>
+              <div id="vehicule-manuel" style="display:none;gap:10px;flex-direction:column;margin-top:8px;">
+                <label for="marque" style="font-size:1em;">Marque :</label>
+                <input type="text" id="marque" name="marque" placeholder="ex: Peugeot" style="font-size:1em;padding:10px 12px;border-radius:8px;">
+                <label for="modele" style="font-size:1em;">Modèle :</label>
+                <input type="text" id="modele" name="modele" placeholder="ex: 208" style="font-size:1em;padding:10px 12px;border-radius:8px;">
+                <label for="annee" style="font-size:1em;">Année :</label>
+                <input type="number" id="annee" name="annee" placeholder="ex: 2019" min="1950" max="2025" style="font-size:1em;padding:10px 12px;border-radius:8px;">
+                <label for="motorisation" style="font-size:1em;">Motorisation :</label>
+                <input type="text" id="motorisation" name="motorisation" placeholder="ex: Essence, Diesel..." style="font-size:1em;padding:10px 12px;border-radius:8px;">
+              </div>
             </div>
           </div>
           <label for="email" style="font-size:1.08em;">Email :</label>
@@ -266,18 +276,26 @@ document.querySelectorAll('.mechanic-nav a').forEach(link => {
       totalDiv.textContent = 'Total : ' + total + ' €';
     }
     // API d'immatriculation (mock ou vraie API)
+    const manuelDiv = document.getElementById('vehicule-manuel');
     immatInput.addEventListener('blur', function() {
       const immat = immatInput.value.trim();
-      if(!immat) return;
+      if(!immat) {
+        vehiculeInfoDiv.style.display = 'none';
+        manuelDiv.style.display = 'flex';
+        return;
+      }
       vehiculeInfoDiv.style.display = 'block';
       vehiculeInfoDiv.textContent = 'Recherche du véhicule...';
       setTimeout(() => {
         if(immat.toUpperCase().startsWith('AA')) {
           vehiculeInfoDiv.textContent = 'Peugeot 208 - Essence - 2019';
+          manuelDiv.style.display = 'none';
         } else if(immat.toUpperCase().startsWith('BB')) {
           vehiculeInfoDiv.textContent = 'Renault Clio - Diesel - 2017';
+          manuelDiv.style.display = 'none';
         } else {
-          vehiculeInfoDiv.textContent = 'Véhicule inconnu (saisie manuelle possible lors du RDV)';
+          vehiculeInfoDiv.textContent = 'Véhicule inconnu. Merci de renseigner les informations ci-dessous.';
+          manuelDiv.style.display = 'flex';
         }
       }, 900);
     });
