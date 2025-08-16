@@ -94,38 +94,45 @@ document.querySelectorAll('.mechanic-nav a').forEach(link => {
         <p>Entretien, réparation et expertise automobile à votre service.</p>
   <button class="cta-btn" id="cta-devis">DEVIS</button>
     <!-- Popup DEVIS -->
-    <div id="devis-popup" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:10000;background:rgba(34,34,34,0.55);justify-content:center;align-items:center;">
-      <div class="devis-container" style="max-width:480px;margin:auto;background:#fff;border-radius:18px;box-shadow:0 8px 32px #eab30833;padding:36px 28px 28px 28px;display:flex;flex-direction:column;gap:18px;position:relative;">
+    <div id="devis-popup" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:10000;background:rgba(34,34,34,0.65);justify-content:center;align-items:center;backdrop-filter:blur(2px);">
+      <div class="devis-container" style="max-width:650px;width:96vw;margin:auto;background:linear-gradient(135deg,#fffbe6 0%,#fff 100%);border-radius:28px;box-shadow:0 12px 48px #eab30855,0 2px 12px #23272a33;padding:48px 38px 38px 38px;display:flex;flex-direction:column;gap:28px;position:relative;">
         <button id="close-devis-popup" style="position:absolute;top:12px;right:12px;background:#eab308;color:#23272a;border:none;border-radius:8px;padding:4px 12px;font-weight:bold;cursor:pointer;box-shadow:0 2px 8px #23272a22;">X</button>
-        <div class="devis-title" style="font-size:2rem;font-weight:bold;color:#eab308;text-align:center;margin-bottom:12px;">DEVIS GRATUIT - TARIF PIÈCE AUTOMOBILE</div>
-        <form class="devis-form" id="devis-form">
-          <label for="type-piece">Type de pièce :</label>
-          <select id="type-piece" name="type-piece" required>
-            <option value="">Sélectionner...</option>
-            <option value="ampoule">Ampoule</option>
-            <option value="phare">Phares antibrouillard</option>
-            <option value="batterie">Batterie</option>
-            <option value="plaquettes">Plaquettes de frein</option>
-            <option value="disques">Disques de frein</option>
-            <option value="pneus">Pneus</option>
-            <option value="embrayage">Embrayage</option>
-            <option value="alternateur">Alternateur</option>
-            <option value="courroie">Courroie de distribution</option>
-            <option value="filtre">Filtre à air</option>
-            <option value="huile">Huile moteur</option>
-            <option value="bougies">Bougies d'allumage</option>
-            <option value="essuieglace">Essuie-glace</option>
-            <option value="radiateur">Radiateur</option>
-            <option value="pompe">Pompe à eau</option>
-          </select>
-          <label for="immat">Immatriculation :</label>
-          <input type="text" id="immat" name="immat" placeholder="AA-123-BB" required>
-          <div id="vehicule-info" class="vehicule-info" style="display:none;background:#fffbe6;border-radius:10px;padding:10px 14px;margin-bottom:12px;color:#23272a;font-size:0.98em;box-shadow:0 1px 6px #eab30822;"></div>
-          <label for="email">Email :</label>
-          <input type="email" id="email" name="email" required>
-          <div class="checkbox-group" id="reparations-group" style="display:flex;flex-wrap:wrap;gap:10px 18px;margin-bottom:18px;"></div>
-          <div class="total" id="total" style="font-size:1.2em;font-weight:bold;color:#22c55e;text-align:right;margin-top:10px;">Total : 0 €</div>
-          <button type="submit" style="width:100%;background:linear-gradient(90deg,#eab308 80%,#facc15 100%);color:#23272a;font-weight:bold;padding:12px 0;border:none;border-radius:8px;font-size:1.1em;box-shadow:0 2px 12px #eab30833;cursor:pointer;transition:background 0.2s;">Obtenir mon devis</button>
+  <div class="devis-title" style="font-size:2.3rem;font-weight:bold;color:#eab308;text-align:center;margin-bottom:18px;letter-spacing:1px;text-shadow:0 2px 12px #fff8,0 1px 0 #eab30855;">DEVIS GRATUIT - TARIF PIÈCE AUTOMOBILE</div>
+        <form class="devis-form" id="devis-form" style="display:flex;flex-direction:column;gap:18px;">
+          <div style="display:flex;gap:24px;flex-wrap:wrap;">
+            <div style="flex:1 1 220px;min-width:200px;">
+              <label for="type-piece" style="font-size:1.08em;">Type de pièce :</label>
+              <select id="type-piece" name="type-piece" required style="font-size:1.08em;padding:12px 14px;border-radius:10px;">
+                <option value="">Sélectionner...</option>
+                <option value="ampoule">Ampoule</option>
+                <option value="phare">Phares antibrouillard</option>
+                <option value="batterie">Batterie</option>
+                <option value="plaquettes">Plaquettes de frein</option>
+                <option value="disques">Disques de frein</option>
+                <option value="pneus">Pneus</option>
+                <option value="embrayage">Embrayage</option>
+                <option value="alternateur">Alternateur</option>
+                <option value="courroie">Courroie de distribution</option>
+                <option value="filtre">Filtre à air</option>
+                <option value="huile">Huile moteur</option>
+                <option value="bougies">Bougies d'allumage</option>
+                <option value="essuieglace">Essuie-glace</option>
+                <option value="radiateur">Radiateur</option>
+                <option value="pompe">Pompe à eau</option>
+              </select>
+            </div>
+            <div style="flex:1 1 220px;min-width:200px;">
+              <label for="immat" style="font-size:1.08em;">Immatriculation :</label>
+              <input type="text" id="immat" name="immat" placeholder="AA-123-BB" required style="font-size:1.08em;padding:12px 14px;border-radius:10px;">
+              <div id="vehicule-info" class="vehicule-info" style="display:none;background:#fffbe6;border-radius:10px;padding:10px 14px;margin-top:8px;color:#23272a;font-size:1em;box-shadow:0 1px 6px #eab30822;"></div>
+            </div>
+          </div>
+          <label for="email" style="font-size:1.08em;">Email :</label>
+          <input type="email" id="email" name="email" required style="font-size:1.08em;padding:12px 14px;border-radius:10px;">
+          <div style="margin-bottom:8px;font-size:1.08em;font-weight:500;color:#23272a;">Sélectionnez les réparations souhaitées :</div>
+          <div class="checkbox-group" id="reparations-group" style="display:flex;flex-wrap:wrap;gap:16px 24px;margin-bottom:18px;"></div>
+          <div class="total" id="total" style="font-size:1.3em;font-weight:bold;color:#22c55e;text-align:right;margin-top:10px;">Total : 0 €</div>
+          <button type="submit" style="width:100%;background:linear-gradient(90deg,#eab308 80%,#facc15 100%);color:#23272a;font-weight:bold;padding:16px 0;border:none;border-radius:12px;font-size:1.15em;box-shadow:0 2px 12px #eab30833;cursor:pointer;transition:background 0.2s;">Obtenir mon devis</button>
         </form>
       </div>
     </div>
