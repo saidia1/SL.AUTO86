@@ -336,12 +336,30 @@ document.querySelectorAll('.mechanic-nav a').forEach(link => {
         </section>
   <!-- Section 'Planning des rendez-vous' supprimée -->
     </main>
-    <footer style="position:relative;display:flex;flex-direction:column;align-items:center;gap:8px;min-height:60px;background:linear-gradient(90deg,#eab308 0%,#facc15 100%);box-shadow:0 -2px 12px #eab30833;margin-top:32px;">
-      <p style="color:#23272a;font-weight:bold;">&copy; 2025 SL AUTO - Tous droits réservés</p>
+    <footer style="position:relative;display:flex;flex-direction:column;align-items:center;gap:8px;min-height:60px;background:#111;box-shadow:0 -2px 12px #23272a33;margin-top:0;">
+      <p style="color:#fff;font-weight:bold;margin:8px 0 0 0;">&copy; 2025 SL AUTO - Tous droits réservés</p>
       <a href="https://www.facebook.com/profile.php?id=100089297584649" target="_blank" style="position:absolute;right:24px;bottom:12px;display:inline-block;">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" style="height:38px;width:38px;filter:drop-shadow(0 2px 8px #23272a22);background:#fff;border-radius:50%;padding:4px;" />
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" style="height:38px;width:38px;filter:drop-shadow(0 2px 8px #23272a22);background:#111;border-radius:50%;padding:4px;" />
       </a>
     </footer>
+</body>
+<style>
+body, main, section, header, footer, .devis-container {
+  margin: 0 !important;
+  padding: 0 !important;
+  background: #fff !important;
+}
+footer {
+  background: #111 !important;
+  color: #fff !important;
+}
+footer p { color: #fff !important; }
+footer a img {
+  background: #111 !important;
+  border-radius: 50%;
+  padding: 4px;
+}
+</style>
     <script src="js/main.js"></script>
 </body>
 <!-- Flatpickr Calendar JS + French locale -->
