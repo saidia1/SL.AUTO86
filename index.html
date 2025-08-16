@@ -92,7 +92,198 @@ document.querySelectorAll('.mechanic-nav a').forEach(link => {
       <div class="hero-content">
         <h2>Votre garage de confiance</h2>
         <p>Entretien, réparation et expertise automobile à votre service.</p>
-  <a href="devis.html"><button class="cta-btn" id="cta-devis">DEVIS</button></a>
+  <button class="cta-btn" id="cta-devis">DEVIS</button>
+    <!-- Popup DEVIS -->
+    <div id="devis-popup" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:10000;background:rgba(34,34,34,0.55);justify-content:center;align-items:center;">
+      <div class="devis-container" style="max-width:480px;margin:auto;background:#fff;border-radius:18px;box-shadow:0 8px 32px #eab30833;padding:36px 28px 28px 28px;display:flex;flex-direction:column;gap:18px;position:relative;">
+        <button id="close-devis-popup" style="position:absolute;top:12px;right:12px;background:#eab308;color:#23272a;border:none;border-radius:8px;padding:4px 12px;font-weight:bold;cursor:pointer;box-shadow:0 2px 8px #23272a22;">X</button>
+        <div class="devis-title" style="font-size:2rem;font-weight:bold;color:#eab308;text-align:center;margin-bottom:12px;">DEVIS GRATUIT - TARIF PIÈCE AUTOMOBILE</div>
+        <form class="devis-form" id="devis-form">
+          <label for="type-piece">Type de pièce :</label>
+          <select id="type-piece" name="type-piece" required>
+            <option value="">Sélectionner...</option>
+            <option value="ampoule">Ampoule</option>
+            <option value="phare">Phares antibrouillard</option>
+            <option value="batterie">Batterie</option>
+            <option value="plaquettes">Plaquettes de frein</option>
+            <option value="disques">Disques de frein</option>
+            <option value="pneus">Pneus</option>
+            <option value="embrayage">Embrayage</option>
+            <option value="alternateur">Alternateur</option>
+            <option value="courroie">Courroie de distribution</option>
+            <option value="filtre">Filtre à air</option>
+            <option value="huile">Huile moteur</option>
+            <option value="bougies">Bougies d'allumage</option>
+            <option value="essuieglace">Essuie-glace</option>
+            <option value="radiateur">Radiateur</option>
+            <option value="pompe">Pompe à eau</option>
+          </select>
+          <label for="immat">Immatriculation :</label>
+          <input type="text" id="immat" name="immat" placeholder="AA-123-BB" required>
+          <div id="vehicule-info" class="vehicule-info" style="display:none;background:#fffbe6;border-radius:10px;padding:10px 14px;margin-bottom:12px;color:#23272a;font-size:0.98em;box-shadow:0 1px 6px #eab30822;"></div>
+          <label for="email">Email :</label>
+          <input type="email" id="email" name="email" required>
+          <div class="checkbox-group" id="reparations-group" style="display:flex;flex-wrap:wrap;gap:10px 18px;margin-bottom:18px;"></div>
+          <div class="total" id="total" style="font-size:1.2em;font-weight:bold;color:#22c55e;text-align:right;margin-top:10px;">Total : 0 €</div>
+          <button type="submit" style="width:100%;background:linear-gradient(90deg,#eab308 80%,#facc15 100%);color:#23272a;font-weight:bold;padding:12px 0;border:none;border-radius:8px;font-size:1.1em;box-shadow:0 2px 12px #eab30833;cursor:pointer;transition:background 0.2s;">Obtenir mon devis</button>
+        </form>
+      </div>
+    </div>
+
+    <style>
+    .checkbox-group label {
+      background: #f8fafc;
+      border-radius: 8px;
+      border: 1.5px solid #eab30855;
+      padding: 8px 14px;
+      margin-bottom: 6px;
+      box-shadow: 0 1px 6px #eab30822;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: border 0.2s, box-shadow 0.2s;
+    }
+    .checkbox-group label:hover, .checkbox-group input[type=checkbox]:focus + label {
+      border-color: #eab308;
+      box-shadow: 0 2px 12px #eab30844;
+    }
+    .checkbox-group input[type=checkbox] {
+      accent-color: #eab308;
+      width: 18px;
+      height: 18px;
+    }
+    </style>
+
+    <script>
+    // Popup devis ouverture/fermeture
+    document.getElementById('cta-devis').onclick = function() {
+      document.getElementById('devis-popup').style.display = 'flex';
+    };
+    document.getElementById('close-devis-popup').onclick = function() {
+      document.getElementById('devis-popup').style.display = 'none';
+    };
+    // Réparations disponibles selon le type de pièce
+    const reparationsData = {
+      ampoule: [
+        { label: "Remplacement ampoule", value: "remplacement_ampoule", prix: 15 },
+        { label: "Vérification circuit", value: "verif_circuit", prix: 10 }
+      ],
+      phare: [
+        { label: "Remplacement phare", value: "remplacement_phare", prix: 40 },
+        { label: "Réglage alignement", value: "reglage_alignement", prix: 20 }
+      ],
+      batterie: [
+        { label: "Remplacement batterie", value: "remplacement_batterie", prix: 35 },
+        { label: "Test de charge", value: "test_charge", prix: 12 }
+      ],
+      plaquettes: [
+        { label: "Remplacement plaquettes", value: "remplacement_plaquettes", prix: 45 },
+        { label: "Nettoyage étriers", value: "nettoyage_etriers", prix: 18 }
+      ],
+      disques: [
+        { label: "Remplacement disques", value: "remplacement_disques", prix: 60 },
+        { label: "Contrôle usure", value: "controle_usure", prix: 10 }
+      ],
+      pneus: [
+        { label: "Montage pneus", value: "montage_pneus", prix: 25 },
+        { label: "Équilibrage", value: "equilibrage", prix: 15 }
+      ],
+      embrayage: [
+        { label: "Remplacement embrayage", value: "remplacement_embrayage", prix: 180 },
+        { label: "Purge hydraulique", value: "purge_hydraulique", prix: 30 }
+      ],
+      alternateur: [
+        { label: "Remplacement alternateur", value: "remplacement_alternateur", prix: 90 },
+        { label: "Test de charge", value: "test_charge_alt", prix: 15 }
+      ],
+      courroie: [
+        { label: "Remplacement courroie", value: "remplacement_courroie", prix: 120 },
+        { label: "Contrôle galets", value: "controle_galets", prix: 20 }
+      ],
+      filtre: [
+        { label: "Remplacement filtre à air", value: "remplacement_filtre", prix: 18 },
+        { label: "Nettoyage boîtier", value: "nettoyage_boiter", prix: 8 }
+      ],
+      huile: [
+        { label: "Vidange huile moteur", value: "vidange_huile", prix: 35 },
+        { label: "Remplacement filtre à huile", value: "remplacement_filtre_huile", prix: 12 }
+      ],
+      bougies: [
+        { label: "Remplacement bougies", value: "remplacement_bougies", prix: 28 },
+        { label: "Contrôle allumage", value: "controle_allumage", prix: 10 }
+      ],
+      essuieglace: [
+        { label: "Remplacement essuie-glace", value: "remplacement_essuieglace", prix: 10 },
+        { label: "Nettoyage pare-brise", value: "nettoyage_parebrise", prix: 5 }
+      ],
+      radiateur: [
+        { label: "Remplacement radiateur", value: "remplacement_radiateur", prix: 110 },
+        { label: "Purge circuit", value: "purge_circuit", prix: 25 }
+      ],
+      pompe: [
+        { label: "Remplacement pompe à eau", value: "remplacement_pompe", prix: 95 },
+        { label: "Contrôle étanchéité", value: "controle_etancheite", prix: 15 }
+      ]
+    };
+    const mainOeuvre = 30;
+    const typePiece = document.getElementById('type-piece');
+    const reparationsGroup = document.getElementById('reparations-group');
+    const totalDiv = document.getElementById('total');
+    const immatInput = document.getElementById('immat');
+    const vehiculeInfoDiv = document.getElementById('vehicule-info');
+    // Générer les cases à cocher selon le type de pièce
+    typePiece.addEventListener('change', function() {
+      reparationsGroup.innerHTML = '';
+      const repList = reparationsData[typePiece.value] || [];
+      repList.forEach(rep => {
+        const label = document.createElement('label');
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.value = rep.value;
+        checkbox.setAttribute('data-prix', rep.prix);
+        label.appendChild(checkbox);
+        label.appendChild(document.createTextNode(rep.label + ' (' + rep.prix + ' €)'));
+        reparationsGroup.appendChild(label);
+      });
+      updateTotal();
+    });
+    // Calcul du total
+    reparationsGroup.addEventListener('change', updateTotal);
+    function updateTotal() {
+      let total = 0;
+      reparationsGroup.querySelectorAll('input[type=checkbox]:checked').forEach(cb => {
+        total += parseFloat(cb.getAttribute('data-prix'));
+      });
+      if(total > 0) total += mainOeuvre;
+      totalDiv.textContent = 'Total : ' + total + ' €';
+    }
+    // API d'immatriculation (mock ou vraie API)
+    immatInput.addEventListener('blur', function() {
+      const immat = immatInput.value.trim();
+      if(!immat) return;
+      vehiculeInfoDiv.style.display = 'block';
+      vehiculeInfoDiv.textContent = 'Recherche du véhicule...';
+      setTimeout(() => {
+        if(immat.toUpperCase().startsWith('AA')) {
+          vehiculeInfoDiv.textContent = 'Peugeot 208 - Essence - 2019';
+        } else if(immat.toUpperCase().startsWith('BB')) {
+          vehiculeInfoDiv.textContent = 'Renault Clio - Diesel - 2017';
+        } else {
+          vehiculeInfoDiv.textContent = 'Véhicule inconnu (saisie manuelle possible lors du RDV)';
+        }
+      }, 900);
+    });
+    // Empêcher l'envoi réel du formulaire
+    document.getElementById('devis-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Votre demande de devis a bien été envoyée ! Vous recevrez une réponse par email.');
+      document.getElementById('devis-form').reset();
+      vehiculeInfoDiv.style.display = 'none';
+      totalDiv.textContent = 'Total : 0 €';
+      reparationsGroup.innerHTML = '';
+    });
+    </script>
       </div>
         </section>
         <section id="services">
