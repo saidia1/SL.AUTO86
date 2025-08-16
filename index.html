@@ -92,7 +92,7 @@ document.querySelectorAll('.mechanic-nav a').forEach(link => {
       <div class="hero-content">
         <h2>Votre garage de confiance</h2>
         <p>Entretien, réparation et expertise automobile à votre service.</p>
-        <button class="cta-btn" id="cta-rdv-popup">Prendre rendez-vous</button>
+  <!-- Bouton 'Prendre rendez-vous' supprimé -->
       </div>
         </section>
         <section id="services">
@@ -118,13 +118,7 @@ document.querySelectorAll('.mechanic-nav a').forEach(link => {
         </div>
       </div>
         </section>
-        <section id="rdv">
-            <!-- Formulaire déplacé sur rdv.html -->
-            <div id="planning">
-                <h3>Planning des rendez-vous</h3>
-                <ul id="rdv-list"></ul>
-            </div>
-        </section>
+  <!-- Section 'Planning des rendez-vous' supprimée -->
     </main>
     <footer>
   <p>&copy; 2025 SL AUTO - Tous droits réservés</p>
@@ -360,10 +354,10 @@ window.addEventListener('keydown', function(e) {
   <div class="rdv-popup-content">
     <div style="max-height:80vh;overflow-y:auto;padding-bottom:12px;">
       <button id="close-rdv-popup">X</button>
-      <h2>Prendre rendez-vous</h2>
+      <h2>Devis</h2>
       <form id="rdv-form-index">
       <div style="margin-bottom:18px;padding:12px 10px;background:#fffbe6;border-radius:12px;border:1px solid #eab30833;box-shadow:0 2px 8px #eab30822;display:flex;flex-direction:column;align-items:stretch;gap:6px;">
-        <span style="color:#eab308;font-size:1em;font-weight:500;">Votre nom de famille.</span>
+        <span style="color:#352c10;font-size:1em;font-weight:500;">Votre nom de famille.</span>
         <label for="lastname-index" style="font-weight:500;color:#23272a;font-size:1.05em;">Nom :</label>
         <input type="text" id="lastname-index" name="lastname" required style="padding:10px 12px;border-radius:8px;border:1px solid #eab30855;font-size:1em;background:#f8fafc;color:#23272a;width:100%;box-sizing:border-box;">
       </div>
