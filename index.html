@@ -5,103 +5,6 @@
     <title>SL AUTO - Garage Automobile</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/styles.css">
-    <style>
-      body {
-        background: linear-gradient(120deg, #f8fafc 0%, #e0e7ff 100%);
-        color: #23272a;
-        font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
-        min-height: 100vh;
-      }
-      .mechanic-header {
-        background: linear-gradient(90deg, #eab308 0%, #facc15 100%);
-        box-shadow: 0 4px 24px #eab30833;
-        padding-bottom: 12px;
-      }
-      .mechanic-title {
-        color: #23272a;
-        font-size: 2.7rem;
-        font-weight: bold;
-        letter-spacing: 2px;
-        text-shadow: 0 2px 8px #fff8, 0 1px 0 #eab30855;
-      }
-      .cta-btn, #cta-rdv-popup {
-        background: linear-gradient(90deg, #22c55e 0%, #3b82f6 100%);
-        color: #fff;
-        border: none;
-        border-radius: 8px;
-        padding: 16px 36px;
-        font-size: 1.2rem;
-        font-weight: bold;
-        box-shadow: 0 2px 16px #3b82f655;
-        cursor: pointer;
-        margin-top: 32px;
-        transition: background 0.2s, transform 0.2s;
-      }
-      .cta-btn:hover, #cta-rdv-popup:hover {
-        background: linear-gradient(90deg, #3b82f6 0%, #22c55e 100%);
-        transform: scale(1.05);
-      }
-      .services-list {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 32px;
-        margin: 48px 0 32px 0;
-      }
-      .service-card {
-        background: #fff;
-        border-radius: 18px;
-        box-shadow: 0 4px 24px #eab30822;
-        padding: 32px 28px 24px 28px;
-        width: 260px;
-        text-align: center;
-        transition: box-shadow 0.2s, transform 0.2s;
-      }
-      .service-card:hover {
-        box-shadow: 0 8px 32px #3b82f655;
-        transform: translateY(-6px) scale(1.03);
-      }
-      .service-icon {
-        font-size: 2.7rem;
-        margin-bottom: 12px;
-        color: #eab308;
-        filter: drop-shadow(0 2px 8px #facc1555);
-      }
-      .service-title {
-        font-size: 1.2rem;
-        font-weight: bold;
-        margin-bottom: 8px;
-      }
-      .service-desc {
-        color: #555;
-        font-size: 1rem;
-      }
-      #hero-bg-video {
-        filter: brightness(0.7) blur(1px);
-      }
-      .hero-content {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: rgba(255,255,255,0.85);
-        border-radius: 18px;
-        padding: 36px 48px;
-        box-shadow: 0 4px 32px #eab30833;
-        text-align: center;
-      }
-      .hero-content h2 {
-        color: #3b82f6;
-        font-size: 2.1rem;
-        font-weight: bold;
-        text-shadow: 0 2px 8px #fff8;
-      }
-      .hero-content p {
-        color: #555;
-        font-size: 1.2rem;
-        margin: 18px 0 32px 0;
-      }
-    </style>
     <!-- Flatpickr Calendar CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
@@ -171,38 +74,8 @@ document.querySelectorAll('.mechanic-nav a').forEach(link => {
     <header class="mechanic-header">
     <div class="header-content mechanic-header-content">
       <div class="logo mechanic-logo">
-        <div class="logo mechanic-logo logo-glow" style="position:relative;">
-          <div style="position:relative;display:inline-block;">
-            <img src="assets/logo1.png" alt="Logo SL AUTO" class="logo-img mlem-logo" style="position:relative;z-index:2;filter:drop-shadow(0 0 16px #ffe066cc) drop-shadow(0 0 32px #ffd70088);">
-            <div class="logo-mlem-shine"></div>
-          </div>
-          <div class="logo-glow-anim" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(255,224,102,0.32) 0%,rgba(255,215,0,0.13) 70%,transparent 100%);filter:blur(14px);z-index:1;animation:glowPulse 2.5s infinite alternate;"></div>
-    <style>
-    .logo-mlem-shine {
-      pointer-events: none;
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      border-radius: 50%;
-      overflow: hidden;
-      z-index: 3;
-    }
-    .logo-mlem-shine::before {
-      content: '';
-      position: absolute;
-      top: -60%; left: -60%;
-      width: 220%; height: 220%;
-      background: linear-gradient(120deg, rgba(255,255,255,0.0) 38%, rgba(255,224,102,0.18) 44%, rgba(255,255,255,0.55) 50%, rgba(255,224,102,0.18) 56%, rgba(255,255,255,0.0) 62%);
-      box-shadow: 0 0 32px 8px #ffe06644;
-      transform: rotate(25deg);
-      animation: mlemShine 2.8s linear infinite;
-    }
-    @keyframes mlemShine {
-      0% { left: -60%; top: -60%; }
-      100% { left: 60%; top: 60%; }
-    }
-    </style>
-        </div>
+  <img src="assets/logo1.png" alt="Logo SL AUTO" class="logo-img">
+      </div>
       <h1 class="mechanic-title">SL AUTO 86</h1>
     </div>
         <nav class="mechanic-nav">
@@ -212,120 +85,39 @@ document.querySelectorAll('.mechanic-nav a').forEach(link => {
         </nav>
     </header>
     <main>
-      <section id="hero" style="position:relative;height:420px;overflow:hidden;">
-        <video autoplay loop muted playsinline id="hero-bg-video" style="width:100vw;height:420px;object-fit:cover;"><source src="assets/garage-animated.mp4" type="video/mp4"></video>
-        <div class="hero-overlay" style="position:absolute;top:0;left:0;width:100vw;height:420px;pointer-events:none;background:linear-gradient(120deg,rgba(255,255,255,0.55) 0%,rgba(234,179,8,0.18) 100%);mix-blend-mode:lighten;"></div>
-        <div class="hero-content">
-          <h2>Bienvenue chez SL AUTO 86</h2>
-          <p>Votre garage automobile de confiance à Poitiers : entretien, réparation, carrosserie, diagnostic et plus encore.</p>
-          <button id="btn-open-devis-ia" class="cta-btn" style="background:#eab308;color:#23272a;font-weight:bold;border:none;padding:18px 44px;border-radius:12px;box-shadow:0 2px 12px #eab30844;cursor:pointer;font-size:1.25em;transition:background 0.2s;text-align:center;">Prendre rendez-vous</button>
-    <div id="devis-ia-modal" style="display:none;position:fixed;z-index:1000;top:0;left:0;width:100vw;height:100vh;background:rgba(36,36,36,0.38);backdrop-filter:blur(2px);align-items:center;justify-content:center;">
-      <div id="devis-ia-card" style="max-width:540px;background:linear-gradient(120deg,#fffbe6 80%,#facc15 100%);border-radius:22px;box-shadow:0 8px 40px #eab30844,0 2px 12px #23272a22;padding:36px 28px 32px 28px;position:relative;overflow:hidden;margin:auto;">
-        <button id="close-devis-ia" style="position:absolute;top:18px;right:18px;background:none;border:none;font-size:1.7em;color:#eab308;cursor:pointer;">&times;</button>
-        <div style="display:flex;align-items:center;justify-content:center;margin-bottom:18px;gap:14px;">
-          <span style="font-size:2.2em;color:#eab308;animation:carAnim 1.2s infinite alternate cubic-bezier(.6,-0.28,.74,1.25);">&#128663;</span>
-          <h2 style="color:#23272a;font-size:1.5em;font-weight:700;letter-spacing:0.01em;">Devis instantané par IA</h2>
-        </div>
-        <form id="form-devis-ia" style="display:flex;flex-direction:column;gap:14px;align-items:center;">
-          <input type="text" name="immatriculation" placeholder="Plaque d'immatriculation (ex: AB-123-CD)" required style="padding:12px 14px;border-radius:8px;border:1.5px solid #eab30888;font-size:1.08em;width:100%;max-width:340px;">
-          <input type="email" name="email" placeholder="Votre email" required style="padding:12px 14px;border-radius:8px;border:1.5px solid #eab30888;font-size:1.08em;width:100%;max-width:340px;">
-          <textarea name="reparation" placeholder="Décrivez la réparation à faire (ex: changement de courroie, vidange, carrosserie...)" required style="padding:12px 14px;border-radius:8px;border:1.5px solid #eab30888;font-size:1.08em;width:100%;max-width:340px;min-height:80px;"></textarea>
-          <button type="submit" style="background:linear-gradient(90deg,#22c55e 80%,#a3e635 100%);color:#23272a;font-weight:bold;border:none;padding:13px 0;border-radius:8px;font-size:1.13em;width:100%;max-width:340px;cursor:pointer;box-shadow:0 2px 8px #22c55e33;transition:transform 0.18s,box-shadow 0.18s;">Valider la demande</button>
-          <div id="devis-ia-result" style="display:none;margin-top:18px;color:#22c55e;font-weight:bold;"></div>
-        </form>
+        <section id="hero">
+      <video autoplay loop muted playsinline id="hero-bg-video">
+        <source src="assets/garage-animated.mp4" type="video/mp4">
+      </video>
+      <div class="hero-content">
+        <h2>Votre garage de confiance</h2>
+        <p>Entretien, réparation et expertise automobile à votre service.</p>
+        <button class="cta-btn" id="cta-rdv-popup">Prendre rendez-vous</button>
       </div>
-      <style>
-      @keyframes btnPulse { 0%{box-shadow:0 0 0 #eab30844;} 100%{box-shadow:0 0 24px #eab30888;} }
-      @keyframes fadeIn { from{opacity:0;transform:translateY(30px);} to{opacity:1;transform:translateY(0);} }
-      @keyframes carAnim { from{transform:translateY(0);} to{transform:translateY(-8px);} }
-      #devis-ia-card input:focus, #devis-ia-card textarea:focus {
-          border-color: #facc15;
-          box-shadow: 0 0 0 2px #eab30844;
-          outline: none;
-      }
-      #devis-ia-card button:active {
-          transform: scale(0.97);
-          box-shadow: 0 1px 4px #eab30844;
-      }
-      </style>
-    </div>
-<script>
-// Modal IA devis
-const btnOpenDevis = document.getElementById('btn-open-devis-ia');
-const modalDevis = document.getElementById('devis-ia-modal');
-const closeDevis = document.getElementById('close-devis-ia');
-const formDevis = document.getElementById('form-devis-ia');
-if(btnOpenDevis) btnOpenDevis.onclick = function(e) {
-  e.preventDefault();
-  modalDevis.style.display = 'flex';
-  modalDevis.style.animation = 'fadeIn 0.5s';
-};
-if(closeDevis) closeDevis.onclick = function() {
-  modalDevis.style.display = 'none';
-};
-// Fermer la modal si clic en dehors du card
-if(modalDevis) modalDevis.onclick = function(e) {
-  if(e.target === modalDevis) modalDevis.style.display = 'none';
-};
-// Simulation IA avancée (identification véhicule + main d'oeuvre)
-if(formDevis) formDevis.onsubmit = function(e) {
-  e.preventDefault();
-  const immat = this.immatriculation.value.trim().toUpperCase();
-  const email = this.email.value.trim();
-  const repar = this.reparation.value.trim();
-  if(!immat || !email || !repar) return;
-  let vehicules = {
-    'AB-123-CD': 'Peugeot 208',
-    'AA-456-BB': 'Renault Clio',
-    'ZZ-999-YY': 'Citroën C3',
-    'BG-456-TR': 'Volkswagen Golf',
-    'DF-789-GH': 'Toyota Yaris'
-  };
-  let vehicule = vehicules[immat] || 'Véhicule non identifié (simulation)';
-  let base = 80;
-  if(/carrosserie|peinture|bosses|rayures/i.test(repar)) base += 120;
-  if(/courroie|distribution|embrayage/i.test(repar)) base += 180;
-  if(/vidange|huile|filtre/i.test(repar)) base += 40;
-  if(/diagnostic|panne|voyant/i.test(repar)) base += 60;
-  let prix = base + Math.floor(Math.random()*60);
-  let delai = 1 + Math.floor(Math.random()*4);
-  let message = `<div style='font-size:1.13em;'><span style='font-size:1.5em;color:#eab308;'>&#128663;</span><br>Pour le véhicule <b>${vehicule}</b> (plaque <b>${immat}</b>),<br>réparation demandée : <b>${repar}</b>.<br><span style='color:#22c55e;'>Estimation main d'oeuvre : <b>${prix}€</b> TTC</span>, délai : <b>${delai} jour(s)</b>.<br><span style='color:#eab308;'>Un email de confirmation sera envoyé à <b>${email}</b> (simulation).</span></div>`;
-  const result = document.getElementById('devis-ia-result');
-  result.innerHTML = message;
-  result.style.display = 'block';
-  this.reset();
-};
-</script>
+        </section>
+        <section id="services">
+      <h2>Nos Services</h2>
+      <div class="services-list">
+        <div class="service-card revision-bg">
+          <div class="service-card-content">
+            <h3>Grosse mécanique</h3>
+            <p>Interventions lourdes et techniques réalisées sur des systèmes mécaniques complexes.</p>
+          </div>
         </div>
-    <style>
-    @keyframes glowPulse {
-      0% { opacity: 0.7; filter: blur(8px); }
-      100% { opacity: 1; filter: blur(16px); }
-    }
-    </style>
-      </section>
-      <section class="services-list">
-        <div class="service-card">
-          <div class="service-icon">🔧</div>
-          <div class="service-title">Entretien & Révision</div>
-          <div class="service-desc">Vidange, filtres, freins, climatisation, contrôle complet.</div>
+        <div class="service-card diag-bg">
+          <div class="service-card-content">
+            <h3>Diagnostic</h3>
+            <p>Diagnostic électronique et mécanique précis.</p>
+          </div>
         </div>
-        <div class="service-card">
-          <div class="service-icon">🚗</div>
-          <div class="service-title">Carrosserie & Peinture</div>
-          <div class="service-desc">Réparation, débosselage, peinture, rénovation optiques.</div>
+        <div class="service-card carrosserie-bg">
+          <div class="service-card-content">
+            <h3>Révision</h3>
+            <p>Entretien complet et contrôle technique.</p>
+          </div>
         </div>
-        <div class="service-card">
-          <div class="service-icon">💡</div>
-          <div class="service-title">Diagnostic & Électronique</div>
-          <div class="service-desc">Diagnostic électronique, recherche de panne, reprogrammation.</div>
-        </div>
-        <div class="service-card">
-          <div class="service-icon">🛠️</div>
-          <div class="service-title">Réparations mécaniques</div>
-          <div class="service-desc">Embrayage, distribution, suspension, échappement, etc.</div>
-        </div>
-      </section>
+      </div>
+        </section>
         <section id="rdv">
             <!-- Formulaire déplacé sur rdv.html -->
             <div id="planning">
