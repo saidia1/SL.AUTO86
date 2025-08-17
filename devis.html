@@ -370,4 +370,60 @@
   }
 }
 </style>
+<footer class="footer-sl-auto">
+  <div class="footer-content">
+    <span>© 2025 SL AUTO - Tous droits réservés</span>
+    <a href="https://facebook.com/SL.AUTO86" target="_blank" aria-label="Facebook" class="footer-facebook">
+      <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="16" cy="16" r="16" fill="#eab308"/>
+        <path d="M21.5 16.5H18V26H14V16.5H12V13.5H14V11.75C14 9.67893 15.6789 8 17.75 8H21V11H19C18.4477 11 18 11.4477 18 12V13.5H21.5V16.5Z" fill="#23272a"/>
+      </svg>
+    </a>
+  </div>
+</footer>
+<style>
+.footer-sl-auto {
+  width: 100vw;
+  background: #18181b;
+  color: #fff;
+  padding: 18px 0 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  box-shadow: 0 -2px 12px #0002;
+}
+.footer-content {
+  width: 98vw;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+  font-size: 1.08em;
+}
+.footer-facebook {
+  display: flex;
+  align-items: center;
+  transition: transform 0.18s;
+}
+.footer-facebook:hover {
+  transform: scale(1.12) rotate(-3deg);
+}
+@media (max-width: 600px) {
+  .footer-content {
+    flex-direction: column;
+    gap: 8px;
+    font-size: 0.98em;
+    text-align: center;
+  }
+  .footer-sl-auto {
+    padding: 12px 0 6px 0;
+  }
+}
+</style>
 </html>

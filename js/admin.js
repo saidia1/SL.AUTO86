@@ -1,6 +1,6 @@
 const API_BASE = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
   ? 'http://127.0.0.1:3001'
-  : 'https://ton-domaine.fr'; // Remplace par l'URL publique de ton backend
+  : 'https://sl-auto86.onrender.com'; // URL publique backend Render
 
 let demandes = [];
 

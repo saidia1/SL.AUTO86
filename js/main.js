@@ -1,3 +1,11 @@
+// Injecte dynamiquement le footer SL AUTO sur toutes les pages
+fetch('footer.html')
+  .then(response => response.text())
+  .then(html => {
+    document.querySelectorAll('#footer-placeholder').forEach(el => {
+      el.outerHTML = html;
+    });
+  });
 // Collecte et envoi des données du formulaire RDV
 document.getElementById('rdv-form').addEventListener('submit', function(e) {
     e.preventDefault();

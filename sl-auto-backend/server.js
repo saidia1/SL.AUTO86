@@ -27,7 +27,10 @@ const rdvSchema = new mongoose.Schema({
 const Rdv = mongoose.model('Rdv', rdvSchema);
 
 app.use(cors({
-  origin: ["https://saidia1.github.io"],
+  origin: [
+    "https://saidia1.github.io",
+    "https://saidia1.github.io/SL.AUTO86"
+  ],
   methods: ["GET", "POST", "PATCH"],
   allowedHeaders: ["Content-Type"]
 }));

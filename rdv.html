@@ -167,9 +167,6 @@
             <!-- Calendrier supprimé -->
         </section>
     </main>
-  <!-- Footer SL AUTO -->
-  <!--#include file="footer.html" -->
-  <div id="footer-placeholder"></div>
     <script type="module" src="js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
@@ -322,17 +319,6 @@ document.getElementById('close-rdv-form').addEventListener('click', function() {
 </script>
 <script src="js/main.js"></script>
 </body>
-<footer class="footer-sl-auto">
-  <div class="footer-content">
-    <span>© 2025 SL AUTO - Tous droits réservés</span>
-    <a href="https://facebook.com/SL.AUTO86" target="_blank" aria-label="Facebook" class="footer-facebook">
-      <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="16" cy="16" r="16" fill="#eab308"/>
-        <path d="M21.5 16.5H18V26H14V16.5H12V13.5H14V11.75C14 9.67893 15.6789 8 17.75 8H21V11H19C18.4477 11 18 11.4477 18 12V13.5H21.5V16.5Z" fill="#23272a"/>
-      </svg>
-    </a>
-  </div>
-</footer>
 <style>
 .footer-sl-auto {
   width: 100vw;
@@ -378,4 +364,90 @@ document.getElementById('close-rdv-form').addEventListener('click', function() {
   }
 }
 </style>
+  <!-- Footer SL AUTO -->
+  <!--#include file="footer.html" -->
+  <div id="footer-placeholder"></div>
+  <footer id="footer-sl-auto" style="position:relative;display:flex;flex-direction:column;align-items:center;gap:8px;min-height:60px;background:#23272a;box-shadow:0 -2px 12px #23272a33;margin-top:0;width:100vw;padding:0 0 16px 0;">
+    <p style="color:#fff;font-weight:bold;margin-bottom:0.5em;">&copy; 2025 SL AUTO - Tous droits réservés</p>
+    <a href="https://www.facebook.com/profile.php?id=100089297584649" target="_blank" id="footer-facebook-link" style="position:absolute;right:24px;bottom:12px;display:inline-block;text-decoration:none;overflow:hidden;">
+      <span id="footer-facebook-btn" style="display:inline-block;font-family:'Segoe UI',Arial,sans-serif;font-weight:bold;font-size:1.25em;color:#eab308;background:#23272a;border:2px solid #fff;border-radius:18px;padding:7px 22px 7px 22px;box-shadow:0 2px 8px #111a;letter-spacing:0.04em;transition:background 0.2s, transform 0.4s cubic-bezier(.4,2,.6,1);position:relative;overflow:hidden;">Facebook</span>
+    </a>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var fbBtn = document.getElementById('footer-facebook-btn');
+      if(fbBtn) {
+        // Click animation (ripple + rotate)
+        fbBtn.addEventListener('click', function(e) {
+          var ripple = document.createElement('span');
+          ripple.style.position = 'absolute';
+          ripple.style.left = (e.offsetX-20) + 'px';
+          ripple.style.top = (e.offsetY-20) + 'px';
+          ripple.style.width = ripple.style.height = '40px';
+          ripple.style.background = 'rgba(234,179,8,0.25)';
+          ripple.style.borderRadius = '50%';
+          ripple.style.pointerEvents = 'none';
+          ripple.style.transform = 'scale(0)';
+          ripple.style.transition = 'transform 0.5s cubic-bezier(.4,2,.6,1), opacity 0.5s';
+          fbBtn.appendChild(ripple);
+          setTimeout(function(){
+            ripple.style.transform = 'scale(2.5)';
+            ripple.style.opacity = '0';
+          }, 10);
+          setTimeout(function(){
+            if(ripple.parentNode) ripple.parentNode.removeChild(ripple);
+          }, 520);
+          fbBtn.style.transform = 'rotate(-8deg) scale(1.08)';
+          setTimeout(function(){
+            fbBtn.style.transform = '';
+          }, 420);
+        });
+        // Hover effect (yellow background, dark text)
+        fbBtn.addEventListener('mouseenter', function() {
+          fbBtn.style.background = '#eab308';
+          fbBtn.style.color = '#23272a';
+        });
+        fbBtn.addEventListener('mouseleave', function() {
+          fbBtn.style.background = '#23272a';
+          fbBtn.style.color = '#eab308';
+        });
+      }
+    });
+    </script>
+    <style>
+    @media (max-width: 600px) {
+      #footer-sl-auto {
+        min-height: 70px !important;
+        padding-bottom: 32px !important;
+      }
+      #footer-sl-auto p {
+        font-size: 1em !important;
+        text-align: center;
+      }
+      #footer-facebook-link {
+        position: static !important;
+        margin-top: 8px !important;
+        display: block !important;
+        text-align: center !important;
+      }
+      #footer-facebook-link span {
+        font-size: 1em !important;
+        padding: 7px 16px 7px 16px !important;
+      }
+    }
+    @media (min-width: 601px) and (max-width: 1024px) {
+      #footer-sl-auto {
+        min-height: 65px !important;
+        padding-bottom: 24px !important;
+      }
+      #footer-sl-auto p {
+        font-size: 1.1em !important;
+      }
+      #footer-facebook-link span {
+        font-size: 1.1em !important;
+        padding: 7px 18px 7px 18px !important;
+      }
+    }
+    </style>
+  </footer>
+<script src="js/main.js"></script>
 </html>
