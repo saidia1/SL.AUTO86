@@ -176,80 +176,9 @@
       <div class="checkbox-group" id="reparations-group">
         <!-- Cases à cocher dynamiques -->
       </div>
-  <footer class="footer-sl-auto">
-    <div class="footer-content">
-      <p class="footer-copyright">&copy; 2025 SL AUTO - Tous droits réservés</p>
-      <a href="https://www.facebook.com/profile.php?id=100089297584649" target="_blank" class="footer-facebook">
-        <span>Facebook</span>
-      </a>
-    </div>
-  </footer>
-  <style>
-    .footer-sl-auto {
-      width: 100vw;
-      background: #23272a;
-      box-shadow: 0 -2px 12px #23272a33;
-      margin-top: 0;
-      padding: 0;
-      position: relative;
-      z-index: 10;
-    }
-    .footer-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 18px 8px 18px;
-      min-height: 60px;
-      width: 100%;
-      box-sizing: border-box;
-    }
-    .footer-copyright {
-      color: #fff;
-      font-weight: bold;
-      font-size: 1em;
-      margin: 0;
-    }
-    .footer-facebook {
-      display: inline-block;
-      text-decoration: none;
-      font-family: 'Segoe UI', Arial, sans-serif;
-      font-weight: bold;
-      font-size: 1.15em;
-      color: #eab308;
-      background: #23272a;
-      border: 2px solid #fff;
-      border-radius: 18px;
-      padding: 7px 22px;
-      box-shadow: 0 2px 8px #111a;
-      letter-spacing: 0.04em;
-      transition: background 0.2s, color 0.2s, border 0.2s;
-      margin-left: 12px;
-    }
-    .footer-facebook:hover {
-      background: #eab308;
-      color: #23272a;
-      border: 2px solid #eab308;
-    }
-    @media (max-width: 600px) {
-      .footer-content {
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        padding: 10px 2vw 8px 2vw;
-      }
-      .footer-facebook {
-        width: 100%;
-        text-align: center;
-        font-size: 1em;
-        padding: 7px 0;
-        margin-left: 0;
-      }
-    }
-  </style>
+  <!-- Footer SL AUTO -->
+  <!--#include file="footer.html" -->
+  <div id="footer-placeholder"></div>
       <div class="total" id="total">Total : 0 €</div>
       <button type="submit">Obtenir mon devis</button>
     </form>
@@ -385,4 +314,60 @@
     });
   </script>
 </body>
+<footer class="footer-sl-auto">
+  <div class="footer-content">
+    <span>© 2025 SL AUTO - Tous droits réservés</span>
+    <a href="https://facebook.com/SL.AUTO86" target="_blank" aria-label="Facebook" class="footer-facebook">
+      <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="16" cy="16" r="16" fill="#eab308"/>
+        <path d="M21.5 16.5H18V26H14V16.5H12V13.5H14V11.75C14 9.67893 15.6789 8 17.75 8H21V11H19C18.4477 11 18 11.4477 18 12V13.5H21.5V16.5Z" fill="#23272a"/>
+      </svg>
+    </a>
+  </div>
+</footer>
+<style>
+.footer-sl-auto {
+  width: 100vw;
+  background: #18181b;
+  color: #fff;
+  padding: 18px 0 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  box-shadow: 0 -2px 12px #0002;
+}
+.footer-content {
+  width: 98vw;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+  font-size: 1.08em;
+}
+.footer-facebook {
+  display: flex;
+  align-items: center;
+  transition: transform 0.18s;
+}
+.footer-facebook:hover {
+  transform: scale(1.12) rotate(-3deg);
+}
+@media (max-width: 600px) {
+  .footer-content {
+    flex-direction: column;
+    gap: 8px;
+    font-size: 0.98em;
+    text-align: center;
+  }
+  .footer-sl-auto {
+    padding: 12px 0 6px 0;
+  }
+}
+</style>
 </html>
