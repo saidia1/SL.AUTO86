@@ -10,90 +10,90 @@
 <body style="background:#23272a; color: #23272a; min-height: 100vh; margin: 0;">
     <div id="page-loader" class="loader-premium">
       <div class="loader-wheel-premium">
-        <img src="assets/loader-wheel.svg" alt="Chargement..." />
-        <div class="loader-light"></div>
-      </div>
-    </div>
-    <style>
-    /* Responsive design pour mobile, tablette et PC */
-    @media (max-width: 600px) {
-      #rdv-form {
-        max-width: 98vw !important;
-        margin: 16px 2vw !important;
-        padding: 18px 6vw 18px 6vw !important;
-        border-radius: 12px !important;
-        box-shadow: 0 4px 16px #eab30833 !important;
-      }
-      #rdv-form input, #rdv-form select, #rdv-form textarea {
-        font-size: 1em !important;
-        padding: 9px 8px !important;
-      }
-      #rdv-form button[type="submit"] {
-        font-size: 1em !important;
-        padding: 10px 0 !important;
-      }
-    }
-    @media (min-width: 601px) and (max-width: 1024px) {
-      #rdv-form {
-        max-width: 90vw !important;
-        margin: 32px auto !important;
-        padding: 28px 8vw 24px 8vw !important;
-        border-radius: 16px !important;
-      }
-      #rdv-form input, #rdv-form select, #rdv-form textarea {
-        font-size: 1.08em !important;
-        padding: 10px 10px !important;
-      }
-      #rdv-form button[type="submit"] {
-        font-size: 1.08em !important;
-        padding: 12px 0 !important;
-      }
-    }
-    .loader-premium {
-      display: flex;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      background: radial-gradient(ellipse at center, #23272a 80%, #111 100%);
-      z-index: 9999;
-      justify-content: center;
-      align-items: center;
-      transition: opacity 0.4s;
-      opacity: 1;
-    }
-    .loader-wheel-premium {
-      position: relative;
-      width: 110px; height: 110px;
-      display: flex; justify-content: center; align-items: center;
-    }
-    .loader-wheel-premium img {
-      width: 90px;
-      box-shadow: 0 4px 32px #eab30855, 0 2px 12px #23272a99;
-      border-radius: 50%;
-      background: #23272a;
-      padding: 12px;
-      animation: spin 1.1s linear infinite;
-    }
-    .loader-light {
-      position: absolute;
-      top: 0; left: 0;
-      width: 110px; height: 110px;
-      border-radius: 50%;
-      background: conic-gradient(from 0deg, #eab30844 0deg 60deg, transparent 60deg 360deg);
-      animation: rotate-light 1.1s linear infinite;
-      pointer-events: none;
-    }
-    @keyframes spin { 100% { transform: rotate(360deg); } }
-    @keyframes rotate-light { 100% { transform: rotate(360deg); } }
-    </style>
-    <header class="mechanic-header">
-        <div class="header-content mechanic-header-content">
-            <div class="logo mechanic-logo">
-                <a href="index.html"><img src="assets/logo1.png" alt="Logo SL AUTO" class="logo-img"></a>
-            </div>
-            <h1 class="mechanic-title">SL AUTO 86</h1>
-        </div>
-        <nav class="mechanic-nav">
+        <footer id="footer-sl-auto" style="position:relative;display:flex;flex-direction:column;align-items:center;gap:8px;min-height:60px;background:#23272a;box-shadow:0 -2px 12px #23272a33;margin-top:0;width:100vw;padding:0 0 16px 0;">
+          <p style="color:#fff;font-weight:bold;margin-bottom:0.5em;">&copy; 2025 SL AUTO - Tous droits réservés</p>
+          <a href="https://www.facebook.com/profile.php?id=100089297584649" target="_blank" id="footer-facebook-link" style="position:absolute;right:24px;bottom:12px;display:inline-block;text-decoration:none;overflow:hidden;">
+            <span id="footer-facebook-btn" style="display:inline-block;font-family:'Segoe UI',Arial,sans-serif;font-weight:bold;font-size:1.25em;color:#eab308;background:#23272a;border:2px solid #fff;border-radius:18px;padding:7px 22px 7px 22px;box-shadow:0 2px 8px #111a;letter-spacing:0.04em;transition:background 0.2s, box-shadow 0.3s, transform 0.4s cubic-bezier(.4,2,.6,1);position:relative;overflow:hidden;">Facebook</span>
+          </a>
+          <script>
+          // Animation pro sur clic Facebook footer
+          document.addEventListener('DOMContentLoaded', function() {
+            var fbBtn = document.getElementById('footer-facebook-btn');
+            if(fbBtn) {
+              fbBtn.addEventListener('click', function(e) {
+                // Ripple
+                var ripple = document.createElement('span');
+                ripple.style.position = 'absolute';
+                ripple.style.left = (e.offsetX-20) + 'px';
+                ripple.style.top = (e.offsetY-20) + 'px';
+                ripple.style.width = ripple.style.height = '40px';
+                ripple.style.background = 'rgba(234,179,8,0.25)';
+                ripple.style.borderRadius = '50%';
+                ripple.style.pointerEvents = 'none';
+                ripple.style.transform = 'scale(0)';
+                ripple.style.transition = 'transform 0.5s cubic-bezier(.4,2,.6,1), opacity 0.5s';
+                fbBtn.appendChild(ripple);
+                setTimeout(function(){
+                  ripple.style.transform = 'scale(2.5)';
+                  ripple.style.opacity = '0';
+                }, 10);
+                setTimeout(function(){
+                  if(ripple.parentNode) ripple.parentNode.removeChild(ripple);
+                }, 520);
+                // Rotation
+                fbBtn.style.transform = 'rotate(-8deg) scale(1.08)';
+                setTimeout(function(){
+                  fbBtn.style.transform = '';
+                }, 420);
+              });
+              // Effet hover visible mais discret
+              fbBtn.addEventListener('mouseenter', function() {
+                fbBtn.style.background = '#eab308';
+                fbBtn.style.color = '#23272a';
+              });
+              fbBtn.addEventListener('mouseleave', function() {
+                fbBtn.style.background = '#23272a';
+                fbBtn.style.color = '#eab308';
+              });
+            }
+          });
+          </script>
+          <style>
+          @media (max-width: 600px) {
+            #footer-sl-auto {
+              min-height: 70px !important;
+              padding-bottom: 32px !important;
+            }
+            #footer-sl-auto p {
+              font-size: 1em !important;
+              text-align: center;
+            }
+            #footer-facebook-link {
+              position: static !important;
+              margin-top: 8px !important;
+              display: block !important;
+              text-align: center !important;
+            }
+            #footer-facebook-link span {
+              font-size: 1em !important;
+              padding: 7px 16px 7px 16px !important;
+            }
+          }
+          @media (min-width: 601px) and (max-width: 1024px) {
+            #footer-sl-auto {
+              min-height: 65px !important;
+              padding-bottom: 24px !important;
+            }
+            #footer-sl-auto p {
+              font-size: 1.1em !important;
+            }
+            #footer-facebook-link span {
+              font-size: 1.1em !important;
+              padding: 7px 18px 7px 18px !important;
+            }
+          }
+          </style>
+        </footer>
             <a href="index.html">Accueil</a>
             <a href="rdv.html">Prendre rendez-vous</a>
             <a href="contact.html">Contact</a>
