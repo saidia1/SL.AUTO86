@@ -1,6 +1,29 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+        <style>
+        /* Responsive design pour mobile, tablette et PC */
+        @media (max-width: 600px) {
+            #rdv-table {
+                font-size: 0.85em;
+                width: 98vw;
+                display: block;
+                overflow-x: auto;
+            }
+            #rdv-table th, #rdv-table td {
+                padding: 4px 6px;
+            }
+        }
+        @media (min-width: 601px) and (max-width: 1024px) {
+            #rdv-table {
+                font-size: 1em;
+                width: 95vw;
+            }
+            #rdv-table th, #rdv-table td {
+                padding: 7px 10px;
+            }
+        }
+        </style>
     <script>
         // Redirection si non authentifié
         if(localStorage.getItem('admin-auth') !== 'ok') {

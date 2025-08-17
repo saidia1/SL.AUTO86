@@ -16,6 +16,46 @@
       </div>
     </div>
     <style>
+    /* Responsive design pour mobile, tablette et PC */
+    @media (max-width: 600px) {
+      #devis-popup .devis-container {
+        max-width: 98vw;
+        margin: 16px 2vw;
+        padding: 18px 6vw 18px 6vw;
+        border-radius: 12px;
+        box-shadow: 0 4px 16px #eab30833;
+      }
+      #devis-popup .devis-title {
+        font-size: 1.3rem;
+      }
+      #devis-popup input, #devis-popup select, #devis-popup textarea {
+        font-size: 1em;
+        padding: 9px 8px;
+      }
+      #devis-popup button[type="submit"] {
+        font-size: 1em;
+        padding: 10px 0;
+      }
+    }
+    @media (min-width: 601px) and (max-width: 1024px) {
+      #devis-popup .devis-container {
+        max-width: 90vw;
+        margin: 32px auto;
+        padding: 28px 8vw 24px 8vw;
+        border-radius: 16px;
+      }
+      #devis-popup .devis-title {
+        font-size: 1.7rem;
+      }
+      #devis-popup input, #devis-popup select, #devis-popup textarea {
+        font-size: 1.08em;
+        padding: 10px 10px;
+      }
+      #devis-popup button[type="submit"] {
+        font-size: 1.08em;
+        padding: 12px 0;
+      }
+    }
     /* Correction couleur noire pour tous les textes du formulaire devis */
     #devis-popup label,
     #devis-popup .checkbox-group label,

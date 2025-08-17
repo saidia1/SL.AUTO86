@@ -15,6 +15,40 @@
       </div>
     </div>
     <style>
+    /* Responsive design pour mobile, tablette et PC */
+    @media (max-width: 600px) {
+      #rdv-form {
+        max-width: 98vw !important;
+        margin: 16px 2vw !important;
+        padding: 18px 6vw 18px 6vw !important;
+        border-radius: 12px !important;
+        box-shadow: 0 4px 16px #eab30833 !important;
+      }
+      #rdv-form input, #rdv-form select, #rdv-form textarea {
+        font-size: 1em !important;
+        padding: 9px 8px !important;
+      }
+      #rdv-form button[type="submit"] {
+        font-size: 1em !important;
+        padding: 10px 0 !important;
+      }
+    }
+    @media (min-width: 601px) and (max-width: 1024px) {
+      #rdv-form {
+        max-width: 90vw !important;
+        margin: 32px auto !important;
+        padding: 28px 8vw 24px 8vw !important;
+        border-radius: 16px !important;
+      }
+      #rdv-form input, #rdv-form select, #rdv-form textarea {
+        font-size: 1.08em !important;
+        padding: 10px 10px !important;
+      }
+      #rdv-form button[type="submit"] {
+        font-size: 1.08em !important;
+        padding: 12px 0 !important;
+      }
+    }
     .loader-premium {
       display: flex;
       position: fixed;
