@@ -6,51 +6,94 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
-    <div id="page-loader" class="loader-premium">
-      <div class="loader-wheel-premium">
-        <img src="assets/loader-wheel.svg" alt="Chargement..." />
-        <div class="loader-light"></div>
-      </div>
-    </div>
-    <style>
-    .loader-premium {
-      display: flex;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      background: radial-gradient(ellipse at center, #23272a 80%, #111 100%);
-      z-index: 9999;
-      justify-content: center;
-      align-items: center;
-      transition: opacity 0.4s;
-      opacity: 1;
-    }
-    .loader-wheel-premium {
-      position: relative;
-      width: 110px; height: 110px;
-      display: flex; justify-content: center; align-items: center;
-    }
-    .loader-wheel-premium img {
-      width: 90px;
-      box-shadow: 0 4px 32px #eab30855, 0 2px 12px #23272a99;
-      border-radius: 50%;
-      background: #23272a;
-      padding: 12px;
-      animation: spin 1.1s linear infinite;
-    }
-    .loader-light {
-      position: absolute;
-      top: 0; left: 0;
-      width: 110px; height: 110px;
-      border-radius: 50%;
-      background: conic-gradient(from 0deg, #eab30844 0deg 60deg, transparent 60deg 360deg);
-      animation: rotate-light 1.1s linear infinite;
-      pointer-events: none;
-    }
-    @keyframes spin { 100% { transform: rotate(360deg); } }
-    @keyframes rotate-light { 100% { transform: rotate(360deg); } }
-    </style>
+<body style="min-height:100vh;background:#23272a;margin:0;">
+        <div id="page-loader" class="loader-premium">
+            <div class="loader-wheel-premium">
+                <img src="assets/loader-wheel.svg" alt="Chargement..." />
+                <div class="loader-light"></div>
+            </div>
+        </div>
+        <style>
+        /* Loader styles déjà présents dans le code d'origine, voir plus haut */
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        @keyframes rotate-light { 100% { transform: rotate(360deg); } }
+        /* Nouveau design animé */
+                        #contact-info {
+                            max-width: 1100px;
+                            width: 99vw;
+                            margin: 8px auto 0 auto;
+                            background: #23272a;
+                            border-radius: 0;
+                            box-shadow: none;
+                            padding: 48px 0 38px 0;
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            gap: 22px;
+                            animation: fadeInUp 0.8s cubic-bezier(.23,1.02,.32,1) 0.2s both;
+                        }
+        @keyframes fadeInUp {
+            from { opacity:0; transform: translateY(40px); }
+            to { opacity:1; transform: none; }
+        }
+            #contact-info h2 {
+                color: #eab308;
+                font-size: 2.1em;
+                font-weight: bold;
+                margin-bottom: 8px;
+                letter-spacing: 0.04em;
+                text-shadow: 0 2px 12px #eab30833;
+                animation: popIn 0.7s cubic-bezier(.23,1.02,.32,1) 0.3s both;
+            }
+        @keyframes popIn {
+            from { opacity:0; transform: scale(0.8); }
+            to { opacity:1; transform: scale(1); }
+        }
+            #contact-info p, #contact-info a {
+                color: #fff;
+                font-size: 1.13em;
+                margin: 0 0 6px 0;
+                transition: color 0.2s;
+            }
+        #contact-info a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1.5px solid #eab30844;
+            transition: color 0.2s, border 0.2s;
+        }
+        #contact-info a:hover {
+            color: #eab308;
+            border-bottom: 2px solid #eab308;
+        }
+                    #contact-info iframe {
+                        display: block;
+                        margin: 18px auto 0 auto;
+                        border-radius: 18px;
+                        border: 2.5px solid #eab308;
+                        box-shadow: 0 2px 12px #eab30822;
+                        animation: fadeInUp 1.1s cubic-bezier(.23,1.02,.32,1) 0.4s both;
+                        min-height: 420px;
+                        width: 98%;
+                        height: 420px;
+                        max-width: 1100px;
+                        position: static;
+                        left: unset;
+                        transform: none;
+                    }
+                    @media (max-width: 600px) {
+                        #contact-info { padding: 0; margin: 0; max-width: 100vw; }
+                        #contact-info h2 { font-size: 1.1em; }
+                        #contact-info iframe {
+                            min-height: 120px;
+                            height: 120px;
+                            width: 98vw;
+                            margin-left: auto;
+                            margin-right: auto;
+                            border-radius: 10px;
+                        }
+                    }
+        </style>
     <header class="mechanic-header">
         <div class="header-content mechanic-header-content">
             <div class="logo mechanic-logo">
@@ -92,12 +135,12 @@ window.addEventListener('keydown', function(e) {
     }
 });
     </script>
-        <section id="contact-info" style="max-width:500px;margin:32px auto;text-align:center;">
+        <section id="contact-info">
             <h2>Nous contacter</h2>
-            <p>Adresse : <strong>157 Avenue du 8 Mai 1945, 86000 Poitiers</strong></p>
-            <p>Téléphone : <a href="tel:+33768037289">07 68 03 72 89</a></p>
-            <p>Email : <a href="mailto:slauto86@laposte.net">slauto86@laposte.net</a></p>
-            <iframe src="https://www.google.com/maps?q=157+Avenue+du+8+Mai+1945,+86000+Poitiers&output=embed" width="100%" height="250" style="border-radius:12px;border:1px solid #eab308;margin-top:16px;"></iframe>
+            <p><span style="font-weight:600;">Adresse :</span> 157 Avenue du 8 Mai 1945, 86000 Poitiers</p>
+            <p><span style="font-weight:600;">Téléphone :</span> <a href="tel:+33768037289">07 68 03 72 89</a></p>
+            <p><span style="font-weight:600;">Email :</span> <a href="mailto:slauto86@laposte.net">slauto86@laposte.net</a></p>
+            <iframe src="https://www.google.com/maps?q=157+Avenue+du+8+Mai+1945,+86000+Poitiers&output=embed" width="100%" height="220" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </section>
     </main>
 </body>
