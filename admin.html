@@ -1,132 +1,69 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-        <style>
-        /* Responsive design pour mobile, tablette et PC */
-        @media (max-width: 600px) {
-            #rdv-table {
-                font-size: 0.85em;
-                width: 98vw;
-                display: block;
-                overflow-x: auto;
-            }
-            #rdv-table th, #rdv-table td {
-                padding: 4px 6px;
-            }
+    <style>
+    /* Responsive design pour mobile, tablette et PC */
+    @media (max-width: 600px) {
+        #rdv-table {
+            font-size: 0.85em;
+            width: 98vw;
+            display: block;
+            overflow-x: auto;
         }
-        @media (min-width: 601px) and (max-width: 1024px) {
-            #rdv-table {
-                font-size: 1em;
-                width: 95vw;
-            }
-            #rdv-table th, #rdv-table td {
-                padding: 7px 10px;
-            }
+        #rdv-table th, #rdv-table td {
+            padding: 4px 6px;
         }
-        </style>
-    <script>
-        // Redirection si non authentifié
-        if(localStorage.getItem('admin-auth') !== 'ok') {
-            window.location.href = 'admin-login.html';
+    }
         }
-    </script>
-    <meta charset="UTF-8">
-    <title>Admin - Validation des rendez-vous</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/styles.css">
-</head>
-<body style="background:#23272a;">
-    <header class="mechanic-header">
-        <div class="header-content mechanic-header-content">
-            <h1 class="mechanic-title">Admin - Gestion des rendez-vous</h1>
-        </div>
-    </header>
-
-    <button id="logout-btn" style="position:absolute;top:18px;right:24px;padding:7px 18px;background:#ef4444;color:#fff;border:none;border-radius:6px;cursor:pointer;font-weight:bold;">Déconnexion</button>
-    <main>
-        <section id="admin-rdv">
-            <h2>Demandes de rendez-vous à valider</h2>
-            <table id="rdv-table" border="1">
-                <thead>
-                    <tr>
-                        <th>Nom</th>
-                        <th>Prénom</th>
-                        <th>Email</th>
-                        <th>Téléphone</th>
-                        <th>Service</th>
-                        <th>Date</th>
-                        <th>Statut</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Les rendez-vous seront insérés ici -->
-                </tbody>
-            </table>
-        </section>
-    </main>
-        <script src="src/js/admin.js"></script>
-        <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var logoutBtn = document.getElementById('logout-btn');
-            if (logoutBtn) {
-                logoutBtn.onclick = function() {
-                    if(confirm('Voulez-vous vraiment vous déconnecter ?')) {
-                        localStorage.removeItem('admin-auth');
-                        window.location.replace('admin-login.html');
-                    }
-                };
-            }
-        });
-        </script>
-</body>
-
-
+    }
 <footer id="footer-sl-auto" style="position:relative;display:flex;flex-direction:column;align-items:center;gap:8px;min-height:60px;background:#23272a;box-shadow:0 -2px 12px #23272a33;margin-top:0;width:100vw;padding:0 0 16px 0;">
     <p style="color:#fff;font-weight:bold;margin-bottom:0.5em;">&copy; 2025 SL AUTO - Tous droits réservés</p>
-        <a href="https://www.facebook.com/profile.php?id=100089297584649" target="_blank" id="footer-facebook-link" style="position:absolute;right:24px;bottom:12px;display:inline-block;text-decoration:none;overflow:hidden;">
-            <span id="footer-facebook-btn" style="display:inline-block;font-family:'Segoe UI',Arial,sans-serif;font-weight:bold;font-size:1.25em;color:#eab308;background:#23272a;border:2px solid #fff;border-radius:18px;padding:7px 22px 7px 22px;box-shadow:0 2px 8px #111a;letter-spacing:0.04em;transition:background 0.2s, transform 0.4s cubic-bezier(.4,2,.6,1);position:relative;overflow:hidden;">Facebook</span>
-        </a>
-        <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var fbBtn = document.getElementById('footer-facebook-btn');
-            if(fbBtn) {
-                fbBtn.addEventListener('click', function(e) {
-                    var ripple = document.createElement('span');
-                    ripple.style.position = 'absolute';
-                    ripple.style.left = (e.offsetX-20) + 'px';
-                    ripple.style.top = (e.offsetY-20) + 'px';
-                    ripple.style.width = ripple.style.height = '40px';
-                    ripple.style.background = 'rgba(234,179,8,0.25)';
-                    ripple.style.borderRadius = '50%';
-                    ripple.style.pointerEvents = 'none';
-                    ripple.style.transform = 'scale(0)';
-                    ripple.style.transition = 'transform 0.5s cubic-bezier(.4,2,.6,1), opacity 0.5s';
-                    fbBtn.appendChild(ripple);
-                    setTimeout(function(){
-                        ripple.style.transform = 'scale(2.5)';
-                        ripple.style.opacity = '0';
-                    }, 10);
-                    setTimeout(function(){
-                        if(ripple.parentNode) ripple.parentNode.removeChild(ripple);
-                    }, 520);
-                    fbBtn.style.transform = 'rotate(-8deg) scale(1.08)';
-                    setTimeout(function(){
-                        fbBtn.style.transform = '';
-                    }, 420);
-                });
-                    // Effet hover fond jaune, texte sombre
-                    fbBtn.addEventListener('mouseenter', function() {
-                        fbBtn.style.background = '#eab308';
-                        fbBtn.style.color = '#23272a';
-                    });
-                    fbBtn.addEventListener('mouseleave', function() {
-                        fbBtn.style.background = '#23272a';
-                        fbBtn.style.color = '#eab308';
-                    });
-            }
-        });
-        </script>
+    <a href="https://www.facebook.com/profile.php?id=100089297584649" target="_blank" id="footer-facebook-link" style="position:absolute;right:24px;bottom:12px;display:inline-block;text-decoration:none;overflow:hidden;">
+        <span id="footer-facebook-btn" style="display:inline-block;font-family:'Segoe UI',Arial,sans-serif;font-weight:bold;font-size:1.25em;color:#eab308;background:#23272a;border:2px solid #fff;border-radius:18px;padding:7px 22px 7px 22px;box-shadow:0 2px 8px #111a;letter-spacing:0.04em;transition:background 0.2s, box-shadow 0.3s, transform 0.4s cubic-bezier(.4,2,.6,1);position:relative;overflow:hidden;">Facebook</span>
+    </a>
+    <script>
+    // Animation pro sur clic Facebook footer
+    document.addEventListener('DOMContentLoaded', function() {
+        var fbBtn = document.getElementById('footer-facebook-btn');
+        if(fbBtn) {
+            fbBtn.addEventListener('click', function(e) {
+                // Ripple
+                var ripple = document.createElement('span');
+                ripple.style.position = 'absolute';
+                ripple.style.left = (e.offsetX-20) + 'px';
+                ripple.style.top = (e.offsetY-20) + 'px';
+                ripple.style.width = ripple.style.height = '40px';
+                ripple.style.background = 'rgba(234,179,8,0.25)';
+                ripple.style.borderRadius = '50%';
+                ripple.style.pointerEvents = 'none';
+                ripple.style.transform = 'scale(0)';
+                ripple.style.transition = 'transform 0.5s cubic-bezier(.4,2,.6,1), opacity 0.5s';
+                fbBtn.appendChild(ripple);
+                setTimeout(function(){
+                    ripple.style.transform = 'scale(2.5)';
+                    ripple.style.opacity = '0';
+                }, 10);
+                setTimeout(function(){
+                    if(ripple.parentNode) ripple.parentNode.removeChild(ripple);
+                }, 520);
+                // Rotation
+                fbBtn.style.transform = 'rotate(-8deg) scale(1.08)';
+                setTimeout(function(){
+                    fbBtn.style.transform = '';
+                }, 420);
+            });
+            // Effet hover visible mais discret
+            fbBtn.addEventListener('mouseenter', function() {
+                fbBtn.style.background = '#eab308';
+                fbBtn.style.color = '#23272a';
+            });
+            fbBtn.addEventListener('mouseleave', function() {
+                fbBtn.style.background = '#23272a';
+                fbBtn.style.color = '#eab308';
+            });
+        }
+    });
+    </script>
     <style>
     @media (max-width: 600px) {
         #footer-sl-auto {
