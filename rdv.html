@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
-<body>
+<body style="background: linear-gradient(120deg, #f8fafc 0%, #e0e7ff 100%); color: #23272a; min-height: 100vh; margin: 0;">
     <div id="page-loader" class="loader-premium">
       <div class="loader-wheel-premium">
         <img src="assets/loader-wheel.svg" alt="Chargement..." />
@@ -73,23 +73,23 @@
               Les rendez-vous sont disponibles du lundi au vendredi, de 9h à 18h. <br>
               Un email de confirmation vous sera envoyé après validation.
             </p>
-            <form id="rdv-form" style="max-width:420px;margin:32px auto;">
-              <div style="margin-bottom:18px;padding:12px 10px;background:#fffbe6;border-radius:12px;border:1px solid #eab30833;box-shadow:0 2px 8px #eab30822;display:flex;flex-direction:column;align-items:stretch;gap:6px;">
-                <span style="color:#eab308;font-size:1em;font-weight:500;">Votre nom de famille.</span>
+            <form id="rdv-form" style="max-width:420px;margin:32px auto;background:#fff;border-radius:18px;border:2px solid #eab308;box-shadow:0 8px 32px #eab30833;padding:36px 28px 28px 28px;">
+              <div style="margin-bottom:18px;padding:12px 10px;background:#fff;border-radius:12px;border:1px solid #eab30833;box-shadow:0 2px 8px #eab30822;display:flex;flex-direction:column;align-items:stretch;gap:6px;">
+                  <span style="color:#eab308;font-size:1em;font-weight:500;">Votre nom de famille.</span>
                 <label for="lastname" style="font-weight:500;color:#23272a;font-size:1.05em;">Nom :</label>
                 <input type="text" id="lastname" name="lastname" required style="padding:10px 12px;border-radius:8px;border:1px solid #eab30855;font-size:1em;background:#f8fafc;color:#23272a;width:100%;box-sizing:border-box;">
               </div>
-              <div style="margin-bottom:18px;padding:12px 10px;background:#fffbe6;border-radius:12px;border:1px solid #eab30833;box-shadow:0 2px 8px #eab30822;display:flex;flex-direction:column;align-items:stretch;gap:6px;">
+              <div style="margin-bottom:18px;padding:12px 10px;background:#fff;border-radius:12px;border:1px solid #eab30833;box-shadow:0 2px 8px #eab30822;display:flex;flex-direction:column;align-items:stretch;gap:6px;">
                 <span style="color:#eab308;font-size:1em;font-weight:500;">Votre prénom usuel.</span>
                 <label for="firstname" style="font-weight:500;color:#23272a;font-size:1.05em;">Prénom :</label>
                 <input type="text" id="firstname" name="firstname" required style="padding:10px 12px;border-radius:8px;border:1px solid #eab30855;font-size:1em;background:#f8fafc;color:#23272a;width:100%;box-sizing:border-box;">
               </div>
-              <div style="margin-bottom:18px;padding:12px 10px;background:#fffbe6;border-radius:12px;border:1px solid #eab30833;box-shadow:0 2px 8px #eab30822;display:flex;flex-direction:column;align-items:stretch;gap:6px;">
+              <div style="margin-bottom:18px;padding:12px 10px;background:#fff;border-radius:12px;border:1px solid #eab30833;box-shadow:0 2px 8px #eab30822;display:flex;flex-direction:column;align-items:stretch;gap:6px;">
                 <span style="color:#eab308;font-size:1em;font-weight:500;">Marque et modèle du véhicule (ex : Peugeot 208).</span>
                 <label for="vehicule" style="font-weight:500;color:#23272a;font-size:1.05em;">Véhicule :</label>
                 <input type="text" id="vehicule" name="vehicule" required style="padding:10px 12px;border-radius:8px;border:1px solid #eab30855;font-size:1em;background:#f8fafc;color:#23272a;width:100%;box-sizing:border-box;">
               </div>
-              <div style="margin-bottom:18px;padding:12px 10px;background:#fffbe6;border-radius:12px;border:1px solid #eab30833;box-shadow:0 2px 8px #eab30822;display:flex;flex-direction:column;align-items:stretch;gap:6px;">
+              <div style="margin-bottom:18px;padding:12px 10px;background:#fff;border-radius:12px;border:1px solid #eab30833;box-shadow:0 2px 8px #eab30822;display:flex;flex-direction:column;align-items:stretch;gap:6px;">
                 <span style="color:#eab308;font-size:1em;font-weight:500;">Type de véhicule (citadine, SUV, utilitaire...)</span>
                 <label for="categorie" style="font-weight:500;color:#23272a;font-size:1.05em;">Catégorie :</label>
                 <select id="categorie" name="categorie" required style="padding:10px 12px;border-radius:8px;border:1px solid #eab30855;font-size:1em;background:#f8fafc;color:#23272a;width:100%;box-sizing:border-box;">
@@ -101,17 +101,17 @@
                   <option value="Autre">Autre</option>
                 </select>
               </div>
-              <div style="margin-bottom:18px;padding:12px 10px;background:#fffbe6;border-radius:12px;border:1px solid #eab30833;box-shadow:0 2px 8px #eab30822;display:flex;flex-direction:column;align-items:stretch;gap:6px;">
+              <div style="margin-bottom:18px;padding:12px 10px;background:#fff;border-radius:12px;border:1px solid #eab30833;box-shadow:0 2px 8px #eab30822;display:flex;flex-direction:column;align-items:stretch;gap:6px;">
                 <span style="color:#eab308;font-size:1em;font-weight:500;">Pour recevoir la confirmation et les infos du rendez-vous.</span>
                 <label for="email" style="font-weight:500;color:#23272a;font-size:1.05em;">Email :</label>
                 <input type="email" id="email" name="email" required style="padding:10px 12px;border-radius:8px;border:1px solid #eab30855;font-size:1em;background:#f8fafc;color:#23272a;width:100%;box-sizing:border-box;">
               </div>
-              <div style="margin-bottom:18px;padding:12px 10px;background:#fffbe6;border-radius:12px;border:1px solid #eab30833;box-shadow:0 2px 8px #eab30822;display:flex;flex-direction:column;align-items:stretch;gap:6px;">
+              <div style="margin-bottom:18px;padding:12px 10px;background:#fff;border-radius:12px;border:1px solid #eab30833;box-shadow:0 2px 8px #eab30822;display:flex;flex-direction:column;align-items:stretch;gap:6px;">
                 <span style="color:#eab308;font-size:1em;font-weight:500;">Pour vous joindre en cas de besoin ou rappel.</span>
                 <label for="phone" style="font-weight:500;color:#23272a;font-size:1.05em;">Téléphone :</label>
                 <input type="tel" id="phone" name="phone" required style="padding:10px 12px;border-radius:8px;border:1px solid #eab30855;font-size:1em;background:#f8fafc;color:#23272a;width:100%;box-sizing:border-box;">
               </div>
-              <div style="margin-bottom:18px;padding:12px 10px;background:#fffbe6;border-radius:12px;border:1px solid #eab30833;box-shadow:0 2px 8px #eab30822;display:flex;flex-direction:column;align-items:stretch;gap:6px;">
+              <div style="margin-bottom:18px;padding:12px 10px;background:#fff;border-radius:12px;border:1px solid #eab30833;box-shadow:0 2px 8px #eab30822;display:flex;flex-direction:column;align-items:stretch;gap:6px;">
                 <span style="color:#eab308;font-size:1em;font-weight:500;">Choisissez le type d’intervention souhaitée.</span>
                 <label for="service" style="font-weight:500;color:#23272a;font-size:1.05em;">Service :</label>
                 <select id="service" name="service" required style="padding:10px 12px;border-radius:8px;border:1px solid #eab30855;font-size:1em;background:#f8fafc;color:#23272a;width:100%;box-sizing:border-box;">
@@ -121,7 +121,7 @@
                   <option value="Carrosserie">Carrosserie</option>
                 </select>
               </div>
-              <div style="margin-bottom:18px;padding:12px 10px;background:#fffbe6;border-radius:12px;border:1px solid #eab30833;box-shadow:0 2px 8px #eab30822;display:flex;flex-direction:column;align-items:stretch;gap:6px;">
+              <div style="margin-bottom:18px;padding:12px 10px;background:#fff;border-radius:12px;border:1px solid #eab30833;box-shadow:0 2px 8px #eab30822;display:flex;flex-direction:column;align-items:stretch;gap:6px;">
                 <span style="color:#eab308;font-size:1em;font-weight:500;">Sélectionnez le créneau souhaité (du lundi au vendredi, 9h-18h).</span>
                 <label for="date" style="font-weight:500;color:#23272a;font-size:1.05em;">Date et heure :</label>
                 <input type="datetime-local" id="date" name="date" required style="padding:10px 12px;border-radius:8px;border:1px solid #eab30855;font-size:1em;background:#f8fafc;color:#23272a;width:100%;box-sizing:border-box;">
