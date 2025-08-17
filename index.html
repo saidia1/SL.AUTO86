@@ -233,9 +233,11 @@ document.querySelectorAll('.mechanic-nav a').forEach(link => {
     // Popup devis ouverture/fermeture
     document.getElementById('cta-devis').onclick = function() {
       document.getElementById('devis-popup').style.display = 'flex';
+      document.body.classList.add('no-scroll');
     };
     document.getElementById('close-devis-popup').onclick = function() {
       document.getElementById('devis-popup').style.display = 'none';
+      document.body.classList.remove('no-scroll');
     };
     // Réparations disponibles selon le type de pièce
     const reparationsData = {

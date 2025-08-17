@@ -1,3 +1,43 @@
+/* Empêche le scroll du body quand le popup devis est ouvert */
+.no-scroll {
+    overflow: hidden !important;
+    height: 100vh !important;
+}
+
+@media (max-width: 600px) {
+    #devis-popup {
+        align-items: flex-start !important;
+        overflow-y: auto !important;
+        min-height: 100vh !important;
+        padding-top: 12vw !important;
+        padding-bottom: 6vw !important;
+    }
+    #devis-popup .devis-container {
+        max-height: 92vh !important;
+        overflow-y: auto !important;
+        padding: 18px 4vw 18px 4vw !important;
+        margin: 4vw 0 !important;
+        border-radius: 10px !important;
+        box-shadow: 0 2px 8px #eab30833 !important;
+    }
+}
+@media (max-width: 600px) {
+    #devis-popup {
+        align-items: flex-start !important;
+        overflow-y: auto !important;
+        min-height: 100vh !important;
+        padding-top: 12vw !important;
+        padding-bottom: 6vw !important;
+    }
+    #devis-popup .devis-container {
+        max-height: 92vh !important;
+        overflow-y: auto !important;
+        padding: 18px 4vw 18px 4vw !important;
+        margin: 4vw 0 !important;
+        border-radius: 10px !important;
+        box-shadow: 0 2px 8px #eab30833 !important;
+    }
+}
 /* --- Amélioration responsive du popup devis sur mobile --- */
 @media (max-width: 600px) {
     #devis-popup .devis-container {
