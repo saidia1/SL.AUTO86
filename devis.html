@@ -31,11 +31,21 @@
       text-align: center;
       margin-bottom: 12px;
     }
-    .devis-form label {
-      font-weight: 500;
-      color: #23272a;
-      margin-bottom: 4px;
-      display: block;
+    .devis-form label,
+    .devis-form .checkbox-group label,
+    .vehicule-info {
+      color: #000 !important;
+    }
+    .devis-form input,
+    .devis-form select,
+    .devis-form textarea {
+      color: #000 !important;
+      background: rgba(255,255,255,0.98) !important;
+    }
+    .devis-form input::placeholder,
+    .devis-form textarea::placeholder {
+      color: #000 !important;
+      opacity: 1;
     }
     .devis-form input, .devis-form select {
       width: 100%;
@@ -44,7 +54,7 @@
       border: 1.5px solid #eab30855;
       font-size: 1em;
       background: #f8fafc;
-      color: #23272a;
+      color: #111;
       margin-bottom: 12px;
       box-sizing: border-box;
     }
@@ -56,7 +66,6 @@
     }
     .devis-form .checkbox-group label {
       font-weight: 400;
-      color: #23272a;
       margin-bottom: 0;
       display: flex;
       align-items: center;
