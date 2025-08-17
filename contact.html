@@ -117,6 +117,80 @@
                         }
                     }
         </style>
+    <footer class="footer-sl-auto">
+        <div class="footer-content">
+            <p class="footer-copyright">&copy; 2025 SL AUTO - Tous droits réservés</p>
+            <a href="https://www.facebook.com/profile.php?id=100089297584649" target="_blank" class="footer-facebook">
+                <span>Facebook</span>
+            </a>
+        </div>
+    </footer>
+    <style>
+        .footer-sl-auto {
+            width: 100vw;
+            background: #23272a;
+            box-shadow: 0 -2px 12px #23272a33;
+            margin-top: 0;
+            padding: 0;
+            position: relative;
+            z-index: 10;
+        }
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 18px 8px 18px;
+            min-height: 60px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .footer-copyright {
+            color: #fff;
+            font-weight: bold;
+            font-size: 1em;
+            margin: 0;
+        }
+        .footer-facebook {
+            display: inline-block;
+            text-decoration: none;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-weight: bold;
+            font-size: 1.15em;
+            color: #eab308;
+            background: #23272a;
+            border: 2px solid #fff;
+            border-radius: 18px;
+            padding: 7px 22px;
+            box-shadow: 0 2px 8px #111a;
+            letter-spacing: 0.04em;
+            transition: background 0.2s, color 0.2s, border 0.2s;
+            margin-left: 12px;
+        }
+        .footer-facebook:hover {
+            background: #eab308;
+            color: #23272a;
+            border: 2px solid #eab308;
+        }
+        @media (max-width: 600px) {
+            .footer-content {
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                padding: 10px 2vw 8px 2vw;
+            }
+            .footer-facebook {
+                width: 100%;
+                text-align: center;
+                font-size: 1em;
+                padding: 7px 0;
+                margin-left: 0;
+            }
+        }
+    </style>
     <header class="mechanic-header">
         <div class="header-content mechanic-header-content">
             <div class="logo mechanic-logo">
