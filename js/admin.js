@@ -21,6 +21,10 @@ function renderTable() {
     if (statutAffiche.toLowerCase() === 'validé') badgeClass = 'badge badge-valide';
     else if (statutAffiche.toLowerCase() === 'refusé') badgeClass = 'badge badge-refuse';
     else badgeClass = 'badge badge-attente';
+    // Affichage des boutons si statut "en attente" (insensible à la casse et accents)
+    // Correction : enlever les accents et vérifier la présence de 'attente' (pour statuts comme 'en attente', 'En attente', etc.)
+    const statutNettoye = (statutAffiche || '').toLowerCase().normalize('NFD').replace(/[^a-z]/g, "");
+    const isAttente = statutNettoye.includes('attente');
     tr.innerHTML = `
       <td>${nomAffiche}</td>
       <td>${prenomAffiche}</td>
@@ -30,7 +34,7 @@ function renderTable() {
       <td>${dateAffiche}</td>
       <td><span class="${badgeClass}">${statutAffiche}</span></td>
       <td>
-        ${statutAffiche === 'en attente' ? `<button onclick="valider(${d.id})">Valider</button> <button onclick="refuser(${d.id})">Refuser</button>` : ''}
+        ${isAttente ? `<button class='valider-btn' onclick="valider(${d._id || d.id})">Valider</button> <button class='refuser-btn' onclick="refuser(${d._id || d.id})">Refuser</button>` : ''}
       </td>
     `;
     tbody.appendChild(tr);
