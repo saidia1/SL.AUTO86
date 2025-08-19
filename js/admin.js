@@ -11,13 +11,26 @@ function renderTable() {
     const tr = document.createElement('tr');
     // Affiche 'nom' si présent, sinon 'lastname' (pour compatibilité)
     const nomAffiche = d.nom || d.lastname || '';
+    const prenomAffiche = d.firstname || '';
+    const emailAffiche = d.email || '';
+    const phoneAffiche = d.phone || '';
+    const serviceAffiche = d.service || '';
+    const dateAffiche = d.date || '';
+    const statutAffiche = d.statut || '';
+    let badgeClass = '';
+    if (statutAffiche.toLowerCase() === 'validé') badgeClass = 'badge badge-valide';
+    else if (statutAffiche.toLowerCase() === 'refusé') badgeClass = 'badge badge-refuse';
+    else badgeClass = 'badge badge-attente';
     tr.innerHTML = `
       <td>${nomAffiche}</td>
-      <td>${d.service}</td>
-      <td>${d.date}</td>
-      <td>${d.statut}</td>
+      <td>${prenomAffiche}</td>
+      <td>${emailAffiche}</td>
+      <td>${phoneAffiche}</td>
+      <td>${serviceAffiche}</td>
+      <td>${dateAffiche}</td>
+      <td><span class="${badgeClass}">${statutAffiche}</span></td>
       <td>
-        ${d.statut === 'en attente' ? `<button onclick="valider(${d.id})">Valider</button> <button onclick="refuser(${d.id})">Refuser</button>` : ''}
+        ${statutAffiche === 'en attente' ? `<button onclick="valider(${d.id})">Valider</button> <button onclick="refuser(${d.id})">Refuser</button>` : ''}
       </td>
     `;
     tbody.appendChild(tr);
