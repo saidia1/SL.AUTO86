@@ -60,7 +60,12 @@ app.post('/rdvs', async (req, res) => {
 // PATCH: modifie le statut d'un rdv
 app.patch('/rdvs/:id', async (req, res) => {
   try {
-    const rdv = await Rdv.findByIdAndUpdate(req.params.id, { statut: req.body.statut }, { new: true });
+    // Essayer d'abord avec _id MongoDB
+    let rdv = await Rdv.findByIdAndUpdate(req.params.id, { statut: req.body.statut }, { new: true });
+    // Si non trouvé, essayer avec le champ 'id' numérique (pour compatibilité locale)
+    if (!rdv) {
+      rdv = await Rdv.findOneAndUpdate({ id: req.params.id }, { statut: req.body.statut }, { new: true });
+    }
     if (!rdv) return res.status(404).json({ error: 'Not found' });
     res.json(rdv);
   } catch (err) {
