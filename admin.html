@@ -1,103 +1,206 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <style>
-    /* Responsive design pour mobile, tablette et PC */
-    @media (max-width: 600px) {
-        #rdv-table {
-            font-size: 0.85em;
-            width: 98vw;
-            display: block;
-            overflow-x: auto;
-        }
-        #rdv-table th, #rdv-table td {
-            padding: 4px 6px;
-        }
-    }
-        }
-    }
-<footer id="footer-sl-auto" style="position:relative;display:flex;flex-direction:column;align-items:center;gap:8px;min-height:60px;background:#23272a;box-shadow:0 -2px 12px #23272a33;margin-top:0;width:100vw;padding:0 0 16px 0;">
-    <p style="color:#fff;font-weight:bold;margin-bottom:0.5em;">&copy; 2025 SL AUTO - Tous droits réservés</p>
-    <a href="https://www.facebook.com/profile.php?id=100089297584649" target="_blank" id="footer-facebook-link" style="position:absolute;right:24px;bottom:12px;display:inline-block;text-decoration:none;overflow:hidden;">
-        <span id="footer-facebook-btn" style="display:inline-block;font-family:'Segoe UI',Arial,sans-serif;font-weight:bold;font-size:1.25em;color:#eab308;background:#23272a;border:2px solid #fff;border-radius:18px;padding:7px 22px 7px 22px;box-shadow:0 2px 8px #111a;letter-spacing:0.04em;transition:background 0.2s, box-shadow 0.3s, transform 0.4s cubic-bezier(.4,2,.6,1);position:relative;overflow:hidden;">Facebook</span>
-    </a>
-    <script>
-    // Animation pro sur clic Facebook footer
-    document.addEventListener('DOMContentLoaded', function() {
-        var fbBtn = document.getElementById('footer-facebook-btn');
-        if(fbBtn) {
-            fbBtn.addEventListener('click', function(e) {
-                // Ripple
-                var ripple = document.createElement('span');
-                ripple.style.position = 'absolute';
-                ripple.style.left = (e.offsetX-20) + 'px';
-                ripple.style.top = (e.offsetY-20) + 'px';
-                ripple.style.width = ripple.style.height = '40px';
-                ripple.style.background = 'rgba(234,179,8,0.25)';
-                ripple.style.borderRadius = '50%';
-                ripple.style.pointerEvents = 'none';
-                ripple.style.transform = 'scale(0)';
-                ripple.style.transition = 'transform 0.5s cubic-bezier(.4,2,.6,1), opacity 0.5s';
-                fbBtn.appendChild(ripple);
-                setTimeout(function(){
-                    ripple.style.transform = 'scale(2.5)';
-                    ripple.style.opacity = '0';
-                }, 10);
-                setTimeout(function(){
-                    if(ripple.parentNode) ripple.parentNode.removeChild(ripple);
-                }, 520);
-                // Rotation
-                fbBtn.style.transform = 'rotate(-8deg) scale(1.08)';
-                setTimeout(function(){
-                    fbBtn.style.transform = '';
-                }, 420);
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Admin - Rendez-vous</title>
+        <link rel="stylesheet" href="css/styles.css">
+        <style>
+            body {
+                background: #181a1b;
+                color: #f3f3f3;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+            }
+            main {
+                flex: 1 0 auto;
+            }
+            /* Adaptation des tableaux et boutons pour thème sombre */
+            #rdv-table {
+                background: #23272a;
+                color: #f3f3f3;
+                box-shadow: 0 8px 40px #000a, 0 2px 12px #23272a22;
+                width: 98vw;
+                max-width: 1800px;
+                min-width: 900px;
+                margin: 0 auto 36px auto;
+                font-size: 1.18em;
+            }
+            #rdv-table th, #rdv-table td {
+                padding: 24px 32px;
+                text-align: left;
+                border-bottom: 1.5px solid #eab30833;
+                min-width: 140px;
+            }
+            @media (max-width: 1200px) {
+                #rdv-table {
+                    font-size: 1em;
+                    min-width: 700px;
+                }
+                #rdv-table th, #rdv-table td {
+                    padding: 18px 14px;
+                    min-width: 100px;
+                }
+            }
+            @media (max-width: 800px) {
+                #rdv-table {
+                    font-size: 0.92em;
+                    min-width: 500px;
+                }
+                #rdv-table th, #rdv-table td {
+                    padding: 10px 6px;
+                    min-width: 80px;
+                }
+            }
+            #rdv-table th {
+                background: linear-gradient(90deg, #23272a 0%, #23272a 100%);
+                color: #eab308;
+                border-bottom: 3px solid #eab30888;
+                text-shadow: none;
+            }
+            #rdv-table td {
+                background: #23272a;
+                color: #f3f3f3;
+            }
+            #rdv-table tbody tr:nth-child(even) {
+                background: #202124;
+            }
+            #rdv-table tbody tr:hover {
+                background: #181a1b;
+            }
+            .valider-btn {
+                background: linear-gradient(90deg, #22c55e 60%, #16a34a 100%);
+                color: #fff;
+            }
+            .valider-btn:hover {
+                background: linear-gradient(90deg, #16a34a 60%, #22c55e 100%);
+            }
+            .refuser-btn {
+                background: linear-gradient(90deg, #ef4444 60%, #b91c1c 100%);
+                color: #fff;
+            }
+            .refuser-btn:hover {
+                background: linear-gradient(90deg, #b91c1c 60%, #ef4444 100%);
+            }
+        </style>
+</head>
+<body>
+        <main>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;">
+                <h1>Liste des rendez-vous</h1>
+                <button id="logout-btn" style="background:#eab308;color:#23272a;font-weight:bold;border:none;padding:10px 22px;border-radius:8px;box-shadow:0 2px 8px #eab30844;cursor:pointer;transition:background 0.2s;">Déconnexion</button>
+            </div>
+            <h2>Tableau des demandes de rendez-vous</h2>
+            <div style="margin-bottom: 24px; display: flex; gap: 24px; align-items: center; font-size: 1.1em;">
+                <span><span class="badge badge-valide" style="vertical-align: middle;">Validé</span> <span style="color: #27ae60; font-weight: 500;">= Validé</span></span>
+                <span><span class="badge badge-refuse" style="vertical-align: middle;">Refusé</span> <span style="color: #e74c3c; font-weight: 500;">= Refusé</span></span>
+                <span><span class="badge badge-attente" style="vertical-align: middle;">En attente</span> <span style="color: #f39c12; font-weight: 500;">= En attente</span></span>
+            </div>
+            <table id="rdv-table">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Email</th>
+                        <th>Téléphone</th>
+                        <th>Service</th>
+                        <th>Date</th>
+                        <th>Statut</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Les rendez-vous seront insérés ici -->
+                </tbody>
+            </table>
+            <script src="js/admin.js"></script>
+            <script src="js/logout.js"></script>
+        </main>
+        <!-- Footer SL AUTO harmonisé -->
+        <footer id="footer-sl-auto" style="position:relative;display:flex;flex-direction:column;align-items:center;gap:8px;min-height:60px;background:#23272a;box-shadow:0 -2px 12px #23272a33;margin-top:0;width:100vw;padding:0 0 16px 0;">
+            <p style="color:#fff;font-weight:bold;margin-bottom:0.5em;">&copy; 2025 SL AUTO - Tous droits réservés</p>
+            <a href="https://www.facebook.com/profile.php?id=100089297584649" target="_blank" id="footer-facebook-link" style="position:absolute;right:24px;bottom:12px;display:inline-block;text-decoration:none;overflow:hidden;">
+                <span id="footer-facebook-btn" style="display:inline-block;font-family:'Segoe UI',Arial,sans-serif;font-weight:bold;font-size:1.25em;color:#eab308;background:#23272a;border:2px solid #fff;border-radius:18px;padding:7px 22px 7px 22px;box-shadow:0 2px 8px #111a;letter-spacing:0.04em;transition:background 0.2s, box-shadow 0.3s, transform 0.4s cubic-bezier(.4,2,.6,1);position:relative;overflow:hidden;">Facebook</span>
+            </a>
+            <script>
+            // Animation pro sur clic Facebook footer
+            document.addEventListener('DOMContentLoaded', function() {
+                var fbBtn = document.getElementById('footer-facebook-btn');
+                if(fbBtn) {
+                    fbBtn.addEventListener('click', function(e) {
+                        // Ripple
+                        var ripple = document.createElement('span');
+                        ripple.style.position = 'absolute';
+                        ripple.style.left = (e.offsetX-20) + 'px';
+                        ripple.style.top = (e.offsetY-20) + 'px';
+                        ripple.style.width = ripple.style.height = '40px';
+                        ripple.style.background = 'rgba(234,179,8,0.25)';
+                        ripple.style.borderRadius = '50%';
+                        ripple.style.pointerEvents = 'none';
+                        ripple.style.transform = 'scale(0)';
+                        ripple.style.transition = 'transform 0.5s cubic-bezier(.4,2,.6,1), opacity 0.5s';
+                        fbBtn.appendChild(ripple);
+                        setTimeout(function(){
+                            ripple.style.transform = 'scale(2.5)';
+                            ripple.style.opacity = '0';
+                        }, 10);
+                        setTimeout(function(){
+                            if(ripple.parentNode) ripple.parentNode.removeChild(ripple);
+                        }, 520);
+                        // Rotation
+                        fbBtn.style.transform = 'rotate(-8deg) scale(1.08)';
+                        setTimeout(function(){
+                            fbBtn.style.transform = '';
+                        }, 420);
+                    });
+                    // Effet hover visible mais discret
+                    fbBtn.addEventListener('mouseenter', function() {
+                        fbBtn.style.background = '#eab308';
+                        fbBtn.style.color = '#23272a';
+                    });
+                    fbBtn.addEventListener('mouseleave', function() {
+                        fbBtn.style.background = '#23272a';
+                        fbBtn.style.color = '#eab308';
+                    });
+                }
             });
-            // Effet hover visible mais discret
-            fbBtn.addEventListener('mouseenter', function() {
-                fbBtn.style.background = '#eab308';
-                fbBtn.style.color = '#23272a';
-            });
-            fbBtn.addEventListener('mouseleave', function() {
-                fbBtn.style.background = '#23272a';
-                fbBtn.style.color = '#eab308';
-            });
-        }
-    });
-    </script>
-    <style>
-    @media (max-width: 600px) {
-        #footer-sl-auto {
-            min-height: 70px !important;
-            padding-bottom: 32px !important;
-        }
-        #footer-sl-auto p {
-            font-size: 1em !important;
-            text-align: center;
-        }
-        #footer-facebook-link {
-            position: static !important;
-            margin-top: 8px !important;
-            display: block !important;
-            text-align: center !important;
-        }
-        #footer-facebook-link span {
-            font-size: 1em !important;
-            padding: 7px 16px 7px 16px !important;
-        }
-    }
-    @media (min-width: 601px) and (max-width: 1024px) {
-        #footer-sl-auto {
-            min-height: 65px !important;
-            padding-bottom: 24px !important;
-        }
-        #footer-sl-auto p {
-            font-size: 1.1em !important;
-        }
-        #footer-facebook-link span {
-            font-size: 1.1em !important;
-            padding: 7px 18px 7px 18px !important;
-        }
-    }
-    </style>
-</footer>
+            </script>
+            <style>
+            @media (max-width: 600px) {
+                #footer-sl-auto {
+                    min-height: 70px !important;
+                    padding-bottom: 32px !important;
+                }
+                #footer-sl-auto p {
+                    font-size: 1em !important;
+                    text-align: center;
+                }
+                #footer-facebook-link {
+                    position: static !important;
+                    margin-top: 8px !important;
+                    display: block !important;
+                    text-align: center !important;
+                }
+                #footer-facebook-link span {
+                    font-size: 1em !important;
+                    padding: 7px 16px 7px 16px !important;
+                }
+            }
+            @media (min-width: 601px) and (max-width: 1024px) {
+                #footer-sl-auto {
+                    min-height: 65px !important;
+                    padding-bottom: 24px !important;
+                }
+                #footer-sl-auto p {
+                    font-size: 1.1em !important;
+                }
+                #footer-facebook-link span {
+                    font-size: 1.1em !important;
+                    padding: 7px 18px 7px 18px !important;
+                }
+            }
+            </style>
+        </footer>
+</body>
 </html>
