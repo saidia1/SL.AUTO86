@@ -24,6 +24,24 @@ document.getElementById('rdv-form').addEventListener('submit', function(e) {
     });
 });
 document.addEventListener('DOMContentLoaded', function() {
+  // Animation ripple sur tous les liens de menu (nav a)
+  document.querySelectorAll('nav a, .mechanic-nav a').forEach(link => {
+    link.addEventListener('pointerdown', function(e) {
+      // Ne déclenche le ripple que pour un vrai clic utilisateur (évite focus/chargement)
+      if (e.isTrusted && (e.button === 0 || e.pointerType === 'touch')) {
+        const ripple = document.createElement('span');
+        ripple.className = 'menu-ripple';
+        const rect = this.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        ripple.style.width = ripple.style.height = size + 'px';
+        ripple.style.left = (e.clientX - rect.left - size/2) + 'px';
+        ripple.style.top = (e.clientY - rect.top - size/2) + 'px';
+        this.style.position = 'relative';
+        this.appendChild(ripple);
+        setTimeout(() => { ripple.remove(); }, 600);
+      }
+    });
+  });
 
   const form = document.getElementById('rdv-form');
   const rdvList = document.getElementById('rdv-list');
@@ -75,6 +93,27 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
+
+// Style ripple menu (à ajouter dynamiquement si pas déjà dans le CSS)
+if (!document.getElementById('menu-ripple-style')) {
+  const style = document.createElement('style');
+  style.id = 'menu-ripple-style';
+  style.textContent = `
+    .menu-ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(234,179,8,0.25);
+      transform: scale(0);
+      animation: menu-ripple-anim 0.6s cubic-bezier(.4,2,.6,1);
+      pointer-events: none;
+      z-index: 2;
+    }
+    @keyframes menu-ripple-anim {
+      to { transform: scale(2.5); opacity: 0; }
+    }
+  `;
+  document.head.appendChild(style);
+}
 
 function showRdvConfirmation(dateStr) {
   const popup = document.createElement('div');

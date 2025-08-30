@@ -25,6 +25,7 @@ function renderTable() {
     // Correction : enlever les accents et vérifier la présence de 'attente' (pour statuts comme 'en attente', 'En attente', etc.)
     const statutNettoye = (statutAffiche || '').toLowerCase().normalize('NFD').replace(/[^a-z]/g, "");
     const isAttente = statutNettoye.includes('attente');
+    const idValue = d._id ? `'${d._id}'` : `'${d.id}'`;
     tr.innerHTML = `
       <td>${nomAffiche}</td>
       <td>${prenomAffiche}</td>
@@ -34,7 +35,7 @@ function renderTable() {
       <td>${dateAffiche}</td>
       <td><span class="${badgeClass}">${statutAffiche}</span></td>
       <td>
-        ${isAttente ? `<button class='valider-btn' onclick="valider(${d._id || d.id})">Valider</button> <button class='refuser-btn' onclick="refuser(${d._id || d.id})">Refuser</button>` : ''}
+        ${isAttente ? `<button class='valider-btn' onclick="valider(${idValue})">Valider</button> <button class='refuser-btn' onclick="refuser(${idValue})">Refuser</button>` : ''}
       </td>
     `;
     tbody.appendChild(tr);
