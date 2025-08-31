@@ -1,3 +1,10 @@
+/* Affichage du popup devis quand il est ouvert */
+#devis-popup.open {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+}
 @media (max-width: 600px) {
     #devis-popup .devis-container {
         max-width: 100vw !important;

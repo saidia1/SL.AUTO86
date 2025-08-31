@@ -143,7 +143,10 @@ document.getElementById('devis-popup').style.display = 'none'; // Toujours masqu
 
 // Ouvre le popup devis au clic sur le bouton
 document.getElementById('cta-devis').onclick = function() {
-  document.getElementById('devis-popup').style.display = 'flex';
+  var popup = document.getElementById('devis-popup');
+  popup.style.display = 'flex';
+  popup.style.alignItems = 'center';
+  popup.style.justifyContent = 'center';
   document.body.classList.add('no-scroll');
 };
 // Ferme le popup devis au clic sur la croix
