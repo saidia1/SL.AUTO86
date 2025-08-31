@@ -22,17 +22,17 @@
         overflow-y: auto !important;
     }
     #devis-popup .devis-container {
-        max-width: 98vw !important;
+        max-width: 100vw !important;
         width: 100vw !important;
         min-width: 0 !important;
         margin: 0 auto !important;
-        padding: 5vw 2vw 18vw 2vw !important; /* padding bas augmenté pour clavier */
-        border-radius: 14px !important;
-        box-shadow: 0 4px 16px #eab30833 !important;
+        padding: 5vw 2vw 6vw 2vw !important; /* padding bas réduit */
+        border-radius: 0 !important;
+        box-shadow: none !important;
         background: #fff !important;
         overflow-y: auto !important;
-        max-height: 80vh !important;
-        height: auto !important;
+        max-height: 100vh !important;
+        height: 100vh !important;
         display: flex !important;
         flex-direction: column !important;
         gap: 16px !important;
