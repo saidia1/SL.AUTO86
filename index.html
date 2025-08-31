@@ -265,6 +265,11 @@ document.getElementById('devis-popup').addEventListener('click', function(e) {
     document.getElementById('cta-devis').onclick = function() {
       document.getElementById('devis-popup').style.display = 'flex';
       document.body.classList.add('no-scroll');
+      // Focus automatique sur le premier champ du formulaire sur mobile
+      setTimeout(function() {
+        var firstInput = document.querySelector('#devis-popup input, #devis-popup select');
+        if(firstInput) firstInput.focus();
+      }, 200);
     };
     document.getElementById('close-devis-popup').onclick = function() {
       document.getElementById('devis-popup').style.display = 'none';
