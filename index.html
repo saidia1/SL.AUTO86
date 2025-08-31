@@ -140,12 +140,10 @@ document.querySelectorAll('.mechanic-nav a').forEach(link => {
 
 // Sécurité : le popup devis ne s'ouvre que sur clic utilisateur
 
-
 // Unifie la logique d'ouverture/fermeture du popup devis (mobile/desktop)
 document.addEventListener('DOMContentLoaded', function() {
   var popup = document.getElementById('devis-popup');
   if (popup) {
-    // Toujours fermé au chargement
     popup.classList.remove('open');
     popup.style.display = 'none';
     document.body.classList.remove('no-scroll');
@@ -171,31 +169,29 @@ document.addEventListener('DOMContentLoaded', function() {
     };
   }
   // Ferme si clic en dehors du formulaire (mobile/desktop)
-  if (popup) {
-    popup.addEventListener('click', function(e) {
-      if (e.target === this) {
+  popup.addEventListener('click', function(e) {
+    if (e.target === this) {
+      popup.classList.remove('open');
+      popup.style.display = 'none';
+      document.body.classList.remove('no-scroll');
+    }
+  });
+  // Swipe vers le bas pour fermer (mobile UX)
+  let touchStartY = null;
+  popup.addEventListener('touchstart', function(e) {
+    if(e.touches.length === 1) touchStartY = e.touches[0].clientY;
+  });
+  popup.addEventListener('touchend', function(e) {
+    if(touchStartY !== null && e.changedTouches.length === 1) {
+      let deltaY = e.changedTouches[0].clientY - touchStartY;
+      if(deltaY > 80) {
         popup.classList.remove('open');
         popup.style.display = 'none';
         document.body.classList.remove('no-scroll');
       }
-    });
-    // Swipe vers le bas pour fermer (mobile UX)
-    let touchStartY = null;
-    popup.addEventListener('touchstart', function(e) {
-      if(e.touches.length === 1) touchStartY = e.touches[0].clientY;
-    });
-    popup.addEventListener('touchend', function(e) {
-      if(touchStartY !== null && e.changedTouches.length === 1) {
-        let deltaY = e.changedTouches[0].clientY - touchStartY;
-        if(deltaY > 80) {
-          popup.classList.remove('open');
-          popup.style.display = 'none';
-          document.body.classList.remove('no-scroll');
-        }
-      }
-      touchStartY = null;
-    });
-  }
+    }
+    touchStartY = null;
+  });
 });
     </script>
     <header class="mechanic-header">
