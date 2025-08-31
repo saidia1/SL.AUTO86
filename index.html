@@ -262,19 +262,39 @@ document.getElementById('devis-popup').addEventListener('click', function(e) {
 
     <script>
     // Popup devis ouverture/fermeture
+    // Ouvre le devis en plein écran mobile, focus auto
     document.getElementById('cta-devis').onclick = function() {
-      document.getElementById('devis-popup').style.display = 'flex';
+      var popup = document.getElementById('devis-popup');
+      popup.classList.add('open');
       document.body.classList.add('no-scroll');
-      // Focus automatique sur le premier champ du formulaire sur mobile
       setTimeout(function() {
         var firstInput = document.querySelector('#devis-popup input, #devis-popup select');
         if(firstInput) firstInput.focus();
       }, 200);
     };
-    document.getElementById('close-devis-popup').onclick = function() {
-      document.getElementById('devis-popup').style.display = 'none';
+    // Ferme le devis (bouton croix ou swipe vers le bas)
+    function closeDevisPopup() {
+      var popup = document.getElementById('devis-popup');
+      popup.classList.remove('open');
       document.body.classList.remove('no-scroll');
-    };
+    }
+    document.getElementById('close-devis-popup').onclick = closeDevisPopup;
+    // Swipe vers le bas pour fermer (mobile UX)
+    let touchStartY = null;
+    document.getElementById('devis-popup').addEventListener('touchstart', function(e) {
+      if(e.touches.length === 1) touchStartY = e.touches[0].clientY;
+    });
+    document.getElementById('devis-popup').addEventListener('touchend', function(e) {
+      if(touchStartY !== null && e.changedTouches.length === 1) {
+        let deltaY = e.changedTouches[0].clientY - touchStartY;
+        if(deltaY > 80) closeDevisPopup();
+      }
+      touchStartY = null;
+    });
+    // Ferme aussi si clic en dehors du formulaire (desktop)
+    document.getElementById('devis-popup').addEventListener('click', function(e) {
+      if (e.target === this) closeDevisPopup();
+    });
     // Réparations disponibles selon le type de pièce
     const reparationsData = {
       ampoule: [
