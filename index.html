@@ -139,27 +139,59 @@ document.querySelectorAll('.mechanic-nav a').forEach(link => {
 });
 
 // Sécurité : le popup devis ne s'ouvre que sur clic utilisateur
-document.getElementById('devis-popup').style.display = 'none'; // Toujours masqué au chargement
 
-// Ouvre le popup devis au clic sur le bouton
-document.getElementById('cta-devis').onclick = function() {
+// Unifie la logique d'ouverture/fermeture du popup devis (mobile/desktop)
+document.addEventListener('DOMContentLoaded', function() {
   var popup = document.getElementById('devis-popup');
-  popup.style.display = 'flex';
-  popup.style.alignItems = 'center';
-  popup.style.justifyContent = 'center';
-  document.body.classList.add('no-scroll');
-};
-// Ferme le popup devis au clic sur la croix
-document.getElementById('close-devis-popup').onclick = function() {
-  document.getElementById('devis-popup').style.display = 'none';
-  document.body.classList.remove('no-scroll');
-};
-// Optionnel : ferme le popup si on clique en dehors du formulaire (mobile UX)
-document.getElementById('devis-popup').addEventListener('click', function(e) {
-  if (e.target === this) {
-    this.style.display = 'none';
+  if (popup) {
+    popup.classList.remove('open');
+    popup.style.display = 'none';
     document.body.classList.remove('no-scroll');
   }
+  var btnDevis = document.getElementById('cta-devis');
+  if (btnDevis) {
+    btnDevis.onclick = function() {
+      popup.classList.add('open');
+      popup.style.display = '';
+      document.body.classList.add('no-scroll');
+      setTimeout(function() {
+        var firstInput = document.querySelector('#devis-popup input, #devis-popup select');
+        if(firstInput) firstInput.focus();
+      }, 200);
+    };
+  }
+  var closeBtn = document.getElementById('close-devis-popup');
+  if (closeBtn) {
+    closeBtn.onclick = function() {
+      popup.classList.remove('open');
+      popup.style.display = 'none';
+      document.body.classList.remove('no-scroll');
+    };
+  }
+  // Ferme si clic en dehors du formulaire (mobile/desktop)
+  popup.addEventListener('click', function(e) {
+    if (e.target === this) {
+      popup.classList.remove('open');
+      popup.style.display = 'none';
+      document.body.classList.remove('no-scroll');
+    }
+  });
+  // Swipe vers le bas pour fermer (mobile UX)
+  let touchStartY = null;
+  popup.addEventListener('touchstart', function(e) {
+    if(e.touches.length === 1) touchStartY = e.touches[0].clientY;
+  });
+  popup.addEventListener('touchend', function(e) {
+    if(touchStartY !== null && e.changedTouches.length === 1) {
+      let deltaY = e.changedTouches[0].clientY - touchStartY;
+      if(deltaY > 80) {
+        popup.classList.remove('open');
+        popup.style.display = 'none';
+        document.body.classList.remove('no-scroll');
+      }
+    }
+    touchStartY = null;
+  });
 });
     </script>
     <header class="mechanic-header">
@@ -269,6 +301,8 @@ document.getElementById('devis-popup').addEventListener('click', function(e) {
     document.getElementById('cta-devis').onclick = function() {
       var popup = document.getElementById('devis-popup');
       popup.classList.add('open');
+      // Supprime tout display inline qui bloquerait l'affichage (mobile/desktop)
+      popup.style.display = '';
       document.body.classList.add('no-scroll');
       setTimeout(function() {
         var firstInput = document.querySelector('#devis-popup input, #devis-popup select');
