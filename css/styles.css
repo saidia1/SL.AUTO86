@@ -13,24 +13,24 @@
             box-sizing: border-box !important;
             overflow-y: auto !important;
             max-height: 100vh !important;
-            display: flex !important;
+            /* display: flex !important;  SUPPRIMÉ pour laisser le JS gérer l'affichage */
         }
-            #devis-popup .devis-container {
-                max-width: 98vw !important;
-                width: 100% !important;
-                max-height: 80vh !important;
-                overflow-y: auto !important;
-                margin: 0 !important;
-                padding: 10px 2vw 10px 2vw !important;
-                border-radius: 12px !important;
-                box-shadow: 0 2px 8px #eab30833 !important;
-                background: linear-gradient(135deg,#fffbe6 0%,#fff 100%) !important;
-                display: flex !important;
-                flex-direction: column !important;
-                align-items: stretch !important;
-                position: relative !important;
-                touch-action: pan-y !important;
-            }
+        #devis-popup .devis-container {
+            max-width: 98vw !important;
+            width: 100% !important;
+            max-height: 80vh !important;
+            overflow-y: auto !important;
+            margin: 0 !important;
+            padding: 10px 2vw 10px 2vw !important;
+            border-radius: 12px !important;
+            box-shadow: 0 2px 8px #eab30833 !important;
+            background: linear-gradient(135deg,#fffbe6 0%,#fff 100%) !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: stretch !important;
+            position: relative !important;
+            touch-action: pan-y !important;
+        }
 }
 /* Empêche le scroll du body quand le popup devis est ouvert */
 .no-scroll {

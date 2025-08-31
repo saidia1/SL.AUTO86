@@ -9,6 +9,16 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
   <body style="background:#23272a;">
+    <script>
+    // Force le masquage du popup devis au tout début, même si un bug CSS ou un script l'affiche
+    document.addEventListener('DOMContentLoaded', function() {
+      var devisPopup = document.getElementById('devis-popup');
+      if (devisPopup) {
+        devisPopup.style.display = 'none';
+        document.body.classList.remove('no-scroll');
+      }
+    });
+    </script>
     <div id="page-loader" class="loader-premium">
       <div class="loader-wheel-premium">
         <img src="assets/loader-wheel.svg" alt="Chargement..." />
